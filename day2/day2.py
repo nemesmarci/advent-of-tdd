@@ -29,6 +29,14 @@ class CubeGame:
     def possible_game(self) -> bool:
         return all(self.possible_set(set_) for set_ in self.sets)
 
+    def min_cubes(self) -> dict:
+        min_cubes = dict(red=0, green=0, blue=0)
+        for set_ in self.sets:
+            for color, n in set_.items():
+                if n > min_cubes[color]:
+                    min_cubes[color] = n
+        return min_cubes
+
 
 class Day2:
     def __init__(self, data: list) -> None:

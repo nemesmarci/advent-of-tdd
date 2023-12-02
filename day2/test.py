@@ -112,5 +112,20 @@ class TestPart1(unittest.TestCase):
         self.assertEqual(self.day2.part_one(), 8)
 
 
+MIN_CUBES = [
+    dict(red=4, green=2, blue=6),
+    dict(red=1, green=3, blue=4),
+    dict(red=20, green=13, blue=6),
+    dict(red=14, green=3, blue=15),
+    dict(red=6, green=3, blue=2)
+]
+
+
+class TestMinCubes(unittest.TestCase):
+    def testMinCubes(self):
+        for game, expected in zip(PARSED, MIN_CUBES):
+            self.assertDictEqual(game.min_cubes(), expected)
+
+
 if __name__ == '__main__':
     unittest.main()
