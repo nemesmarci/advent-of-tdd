@@ -1,8 +1,9 @@
 from __future__ import annotations
+from math import prod
 
 
 class CubeGame:
-    limits = dict(red=12, green=13, blue=14)
+    limits: dict = dict(red=12, green=13, blue=14)
 
     @classmethod
     def parse(cls, line: str) -> CubeGame:
@@ -42,11 +43,15 @@ class Day2:
     def __init__(self, data: list) -> None:
         self.games = [CubeGame.parse(line.strip()) for line in data]
 
-    def part_one(self):
+    def part_one(self) -> int:
         return sum(game.id for game in self.games if game.possible_game())
+
+    def part_two(self) -> int:
+        return sum(prod(game.min_cubes().values()) for game in self.games)
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         day2 = Day2(data)
-        print(day2.part_one())
+    print(day2.part_one())
+    print(day2.part_two())

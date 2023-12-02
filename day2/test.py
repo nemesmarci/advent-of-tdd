@@ -127,5 +127,13 @@ class TestMinCubes(unittest.TestCase):
             self.assertDictEqual(game.min_cubes(), expected)
 
 
+class TestPart2(unittest.TestCase):
+    def setUp(self):
+        self.day2 = Day2(TEST_INPUT)
+
+    def test_par2(self):
+        self.assertEqual(self.day2.part_two(), 2286)
+
+
 if __name__ == '__main__':
     unittest.main()
