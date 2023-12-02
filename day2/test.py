@@ -46,5 +46,12 @@ class TestParser(unittest.TestCase):
             self.assertListEqual(cube.sets, parsed.sets)
 
 
+class TestLimits(unittest.TestCase):
+    def test_limits(self):
+        self.assertEqual(CubeGame.limits['red'], 12)
+        self.assertEqual(CubeGame.limits['green'], 13)
+        self.assertEqual(CubeGame.limits['blue'], 14)
+
+
 if __name__ == '__main__':
     unittest.main()

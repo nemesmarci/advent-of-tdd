@@ -2,6 +2,8 @@ from __future__ import annotations
 
 
 class CubeGame:
+    limits = dict(red=12, green=13, blue=14)
+
     @classmethod
     def parse(cls, line: str) -> CubeGame:
         game_str, sets_str = line.split(': ')
