@@ -94,5 +94,15 @@ class TestPossibleSet(unittest.TestCase):
             self.assertFalse(self.possible(set_), msg=set_)
 
 
+class TestPossibleGame(unittest.TestCase):
+    def testValid(self):
+        for game_id in (1, 2, 5):
+            self.assertTrue(PARSED[game_id - 1].possible_game())
+
+    def testInvalid(self):
+        for game_id in (3, 4):
+            self.assertFalse(PARSED[game_id - 1].possible_game())
+
+
 if __name__ == '__main__':
     unittest.main()

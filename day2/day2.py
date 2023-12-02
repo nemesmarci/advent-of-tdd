@@ -23,5 +23,8 @@ class CubeGame:
         self.sets = sets
 
     @staticmethod
-    def possible_set(set_):
+    def possible_set(set_: dict) -> bool:
         return all(n <= CubeGame.limits[color] for color, n in set_.items())
+
+    def possible_game(self) -> bool:
+        return all(self.possible_set(set_) for set_ in self.sets)
