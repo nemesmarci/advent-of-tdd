@@ -53,5 +53,46 @@ class TestLimits(unittest.TestCase):
         self.assertEqual(CubeGame.limits['blue'], 14)
 
 
+class TestPossibleSet(unittest.TestCase):
+    def setUp(self):
+        self.possible = CubeGame.possible_set
+
+    def testValid(self):
+        for set_ in (
+            dict(red=1),
+            dict(red=12),
+            dict(green=2),
+            dict(green=13),
+            dict(blue=3),
+            dict(blue=14),
+            dict(red=4, green=5),
+            dict(red=6, blue=7),
+            dict(green=8, blue=9),
+            dict(red=10, green=11, blue=12)
+        ):
+            self.assertTrue(self.possible(set_), msg=set_)
+
+    def testInvalid(self):
+        for set_ in (
+            dict(red=13),
+            dict(green=14),
+            dict(blue=15),
+            dict(red=1, green=14),
+            dict(red=2, blue=15),
+            dict(red=13, green=3),
+            dict(red=13, blue=4),
+            dict(green=5, blue=15),
+            dict(green=14, blue=5),
+            dict(red=6, green=14, blue=7),
+            dict(red=8, green=9, blue=15),
+            dict(red=9, green=14, blue=15),
+            dict(red=13, green=10, blue=11),
+            dict(red=13, green=14, blue=12),
+            dict(red=13, green=13, blue=15),
+            dict(red=13, green=14, blue=15)
+        ):
+            self.assertFalse(self.possible(set_), msg=set_)
+
+
 if __name__ == '__main__':
     unittest.main()
