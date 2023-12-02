@@ -1,6 +1,6 @@
 import unittest
 
-from day2 import CubeGame
+from day2 import CubeGame, Day2
 
 TEST_INPUT = [
     'Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green',
@@ -102,6 +102,14 @@ class TestPossibleGame(unittest.TestCase):
     def testInvalid(self):
         for game_id in (3, 4):
             self.assertFalse(PARSED[game_id - 1].possible_game())
+
+
+class TestPart1(unittest.TestCase):
+    def setUp(self):
+        self.day2 = Day2(TEST_INPUT)
+
+    def test_part1(self):
+        self.assertEqual(self.day2.part_one(), 8)
 
 
 if __name__ == '__main__':

@@ -28,3 +28,17 @@ class CubeGame:
 
     def possible_game(self) -> bool:
         return all(self.possible_set(set_) for set_ in self.sets)
+
+
+class Day2:
+    def __init__(self, data: list) -> None:
+        self.games = [CubeGame.parse(line.strip()) for line in data]
+
+    def part_one(self):
+        return sum(game.id for game in self.games if game.possible_game())
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        day2 = Day2(data)
+        print(day2.part_one())
