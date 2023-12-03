@@ -45,7 +45,7 @@ TEST_NEAR_GEAR = {
 }
 
 
-class TestParser(unittest.TestCase):
+class TestEngine(unittest.TestCase):
     def setUp(self):
         self.engine = Engine(TEST_INPUT)
 
@@ -58,33 +58,21 @@ class TestParser(unittest.TestCase):
     def test_parse_parts(self):
         self.assertDictEqual(self.engine.parts, TEST_PARTS)
 
-
-class TestHasSymbol(unittest.TestCase):
     def test_has_symbol(self):
-        engine = Engine(TEST_INPUT)
-        has_symbol = {coord: engine.has_symbol(part_no, *coord)
-                      for coord, part_no in engine.parts.items()}
+        has_symbol = {coord: self.engine.has_symbol(part_no, *coord)
+                      for coord, part_no in self.engine.parts.items()}
         self.assertDictEqual(has_symbol, TEST_HAS_SYMBOL)
 
-
-class TestNearGear(unittest.TestCase):
     def test_near_gear(self):
-        engine = Engine(TEST_INPUT)
-        near_gear = {coord: engine.near_gear(part_no, *coord)
-                     for coord, part_no in engine.parts.items()}
+        near_gear = {coord: self.engine.near_gear(part_no, *coord)
+                     for coord, part_no in self.engine.parts.items()}
         self.assertDictEqual(near_gear, TEST_NEAR_GEAR)
 
-
-class TestPart1(unittest.TestCase):
     def test_part1(self):
-        engine = Engine(TEST_INPUT)
-        self.assertEqual(engine.part_one(), 4361)
+        self.assertEqual(self.engine.part_one(), 4361)
 
-
-class TestPart2(unittest.TestCase):
     def test_part2(self):
-        engine = Engine(TEST_INPUT)
-        self.assertEqual(engine.part_two(), 467835)
+        self.assertEqual(self.engine.part_two(), 467835)
 
 
 if __name__ == '__main__':
