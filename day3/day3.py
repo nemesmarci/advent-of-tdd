@@ -19,3 +19,11 @@ class Engine:
                         )
                 else:
                     parsed_number = False
+
+    def has_symbol(self, part: int, y: int, x: int) -> bool:
+        for i in range(y - 1, y + 2):
+            for j in range(x - 1, x + len(str(part)) + 1):
+                c = self.schematic[(i, j)]
+                if c != '.' and not c.isnumeric():
+                    return True
+        return False

@@ -24,6 +24,16 @@ TEST_PARTS = {
     (9, 1): 664, (9, 5): 598
 }
 
+TEST_HAS_SYMBOL = {
+    (0, 0): True, (0, 5): False,
+    (2, 2): True, (2, 6): True,
+    (4, 0): True,
+    (5, 7): False,
+    (6, 2): True,
+    (7, 6):  True,
+    (9, 1):  True, (9, 5): True
+}
+
 
 class TestParser(unittest.TestCase):
     def setUp(self):
@@ -37,6 +47,14 @@ class TestParser(unittest.TestCase):
 
     def test_parse_parts(self):
         self.assertDictEqual(self.engine.parts, TEST_PARTS)
+
+
+class TestHasSymbol(unittest.TestCase):
+    def test_has_symbol(self):
+        engine = Engine(TEST_INPUT)
+        has_symbol = {coord: engine.has_symbol(part_no, *coord)
+                      for coord, part_no in engine.parts.items()}
+        self.assertDictEqual(has_symbol, TEST_HAS_SYMBOL)
 
 
 if __name__ == '__main__':
