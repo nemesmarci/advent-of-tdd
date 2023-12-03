@@ -1,6 +1,6 @@
 import re
 from collections import defaultdict
-from typing import Iterable
+from typing import Iterable, Optional, Tuple
 
 
 class Engine:
@@ -27,6 +27,14 @@ class Engine:
                 if c != '.' and not c.isnumeric():
                     return True
         return False
+
+    def near_gear(
+            self, part: int, y: int, x: int) -> Optional[Tuple[int, int]]:
+        for i in range(y - 1, y + 2):
+            for j in range(x - 1, x + len(str(part)) + 1):
+                if self.schematic[(i, j)] == '*':
+                    return i, j
+        return None
 
     def part_one(self) -> int:
         return (sum(part for coord, part in self.parts.items()

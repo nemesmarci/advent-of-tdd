@@ -30,8 +30,18 @@ TEST_HAS_SYMBOL = {
     (4, 0): True,
     (5, 7): False,
     (6, 2): True,
-    (7, 6):  True,
-    (9, 1):  True, (9, 5): True
+    (7, 6): True,
+    (9, 1): True, (9, 5): True
+}
+
+TEST_NEAR_GEAR = {
+    (0, 0): (1, 3), (0, 5): None,
+    (2, 2): (1, 3), (2, 6): None,
+    (4, 0): (4, 3),
+    (5, 7): None,
+    (6, 2): None,
+    (7, 6): (8, 5),
+    (9, 1): None, (9, 5): (8, 5)
 }
 
 
@@ -55,6 +65,14 @@ class TestHasSymbol(unittest.TestCase):
         has_symbol = {coord: engine.has_symbol(part_no, *coord)
                       for coord, part_no in engine.parts.items()}
         self.assertDictEqual(has_symbol, TEST_HAS_SYMBOL)
+
+
+class TestNearGear(unittest.TestCase):
+    def test_near_gear(self):
+        engine = Engine(TEST_INPUT)
+        near_gear = {coord: engine.near_gear(part_no, *coord)
+                     for coord, part_no in engine.parts.items()}
+        self.assertDictEqual(near_gear, TEST_NEAR_GEAR)
 
 
 class TestPart1(unittest.TestCase):
