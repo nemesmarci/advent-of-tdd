@@ -40,8 +40,18 @@ class Engine:
         return (sum(part for coord, part in self.parts.items()
                     if self.has_symbol(part, *coord)))
 
+    def part_two(self) -> int:
+        gears = defaultdict(list)
+        for coord, part in self.parts.items():
+            if gear := self.near_gear(part, *coord):
+                gears[gear].append(part)
+        return (sum(connected[0] * connected[1]
+                    for gear, connected in gears.items()
+                    if len(connected) == 2))
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         engine = Engine(data)
     print(engine.part_one())
+    print(engine.part_two())

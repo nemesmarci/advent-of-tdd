@@ -81,5 +81,11 @@ class TestPart1(unittest.TestCase):
         self.assertEqual(engine.part_one(), 4361)
 
 
+class TestPart2(unittest.TestCase):
+    def test_part2(self):
+        engine = Engine(TEST_INPUT)
+        self.assertEqual(engine.part_two(), 467835)
+
+
 if __name__ == '__main__':
     unittest.main()
