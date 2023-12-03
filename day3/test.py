@@ -57,5 +57,11 @@ class TestHasSymbol(unittest.TestCase):
         self.assertDictEqual(has_symbol, TEST_HAS_SYMBOL)
 
 
+class TestPart1(unittest.TestCase):
+    def test_part1(self):
+        engine = Engine(TEST_INPUT)
+        self.assertEqual(engine.part_one(), 4361)
+
+
 if __name__ == '__main__':
     unittest.main()

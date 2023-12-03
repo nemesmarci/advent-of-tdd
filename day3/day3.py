@@ -27,3 +27,13 @@ class Engine:
                 if c != '.' and not c.isnumeric():
                     return True
         return False
+
+    def part_one(self) -> int:
+        return (sum(part for coord, part in self.parts.items()
+                    if self.has_symbol(part, *coord)))
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        engine = Engine(data)
+    print(engine.part_one())
