@@ -29,6 +29,9 @@ class TestScratchCards(unittest.TestCase):
             self.assertEqual(winning, PARSED[expected][0])
             self.assertEqual(numbers, PARSED[expected][1])
 
+    def test_part1(self):
+        self.assertEqual(ScratchCards.part_one(TEST_DATA), 13)
+
 
 if __name__ == '__main__':
     unittest.main()
