@@ -17,6 +17,10 @@ class ScratchCards:
             points += int(2 ** (len(winning & numbers) - 1))
         return points
 
+    @staticmethod
+    def part_two(data: Iterable[str]) -> int:
+        return 0
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:

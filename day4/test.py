@@ -32,6 +32,9 @@ class TestScratchCards(unittest.TestCase):
     def test_part1(self):
         self.assertEqual(ScratchCards.part_one(TEST_DATA), 13)
 
+    def test_part2(self):
+        self.assertEqual(ScratchCards.part_two(TEST_DATA), 30)
+
 
 if __name__ == '__main__':
     unittest.main()
