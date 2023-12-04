@@ -1,3 +1,4 @@
+from collections import Counter
 from typing import Tuple, Iterable
 
 
@@ -19,9 +20,17 @@ class ScratchCards:
 
     @staticmethod
     def part_two(data: Iterable[str]) -> int:
-        return 0
+        cards = Counter()
+        for line in data:
+            card, winning, numbers = ScratchCards.parse(line)
+            cards[card] += 1
+            for new_card in range(card + 1, card + 1 + len(winning & numbers)):
+                cards[new_card] += cards[card]
+        return sum(cards.values())
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         print(ScratchCards.part_one(data))
+        data.seek(0)
+        print(ScratchCards.part_two(data))
