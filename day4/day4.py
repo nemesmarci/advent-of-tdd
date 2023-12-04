@@ -11,4 +11,13 @@ class ScratchCards:
 
     @staticmethod
     def part_one(data: Iterable[str]) -> int:
-        return 0
+        points = 0
+        for line in data:
+            _, winning, numbers = ScratchCards.parse(line)
+            points += int(2 ** (len(winning & numbers) - 1))
+        return points
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        print(ScratchCards.part_one(data))
