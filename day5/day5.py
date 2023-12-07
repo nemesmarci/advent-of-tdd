@@ -22,3 +22,6 @@ class Almanac:
                     target = dest[target - source.start]
                     break
         return target
+
+    def part_one(self) -> int:
+        return 0

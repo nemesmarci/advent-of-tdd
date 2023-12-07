@@ -32,6 +32,9 @@ class TestAlmanac(unittest.TestCase):
         for seed, location in zip(self.almanac.seeds, LOCATIONS):
             self.assertEqual(self.almanac.location(seed), location)
 
+    def testPart1(self):
+        self.assertEqual(self.almanac.part_one(), 35)
+
 
 if __name__ == '__main__':
     unittest.main()
