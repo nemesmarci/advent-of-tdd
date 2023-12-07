@@ -14,3 +14,6 @@ class Almanac:
                     rules.append((range(source, source + length),
                                   range(dest, dest + length)))
             self.map_ranges.append(rules)
+
+    def location(self, target: int) -> int:
+        return 0

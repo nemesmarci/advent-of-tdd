@@ -15,6 +15,7 @@ MAP_RANGES = [
     [(range(69, 70), range(0, 1)), (range(0, 69), range(1, 70))],
     [(range(56, 93), range(60, 97)), (range(93, 97), range(56, 60))]
 ]
+LOCATIONS = [82, 43, 86, 35]
 
 
 class TestAlmanac(unittest.TestCase):
@@ -26,6 +27,10 @@ class TestAlmanac(unittest.TestCase):
     def testParse(self):
         self.assertListEqual(self.almanac.seeds, SEEDS)
         self.assertListEqual(self.almanac.map_ranges, MAP_RANGES)
+
+    def testLocation(self):
+        for seed, location in zip(self.almanac.seeds, LOCATIONS):
+            self.assertEqual(self.almanac.location(seed), location)
 
 
 if __name__ == '__main__':
