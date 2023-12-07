@@ -16,4 +16,9 @@ class Almanac:
             self.map_ranges.append(rules)
 
     def location(self, target: int) -> int:
-        return 0
+        for rules in self.map_ranges:
+            for source, dest in rules:
+                if target in source:
+                    target = dest[target - source.start]
+                    break
+        return target
