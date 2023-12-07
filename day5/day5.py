@@ -24,4 +24,4 @@ class Almanac:
         return target
 
     def part_one(self) -> int:
-        return 0
+        return min(map(self.location, self.seeds))
