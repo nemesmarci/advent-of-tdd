@@ -1,5 +1,6 @@
 from typing import Iterable
 from collections import defaultdict, Counter
+from itertools import chain
 
 
 class CamelCards:
@@ -33,5 +34,20 @@ class CamelCards:
             buckets[self.bucket(hand)].append((hand, bet))
         return buckets
 
+    @staticmethod
+    def key(item: tuple[str, int]) -> str:
+        return item[0].translate(str.maketrans('TJQKA', 'ABCDE'))
+
     def part_one(self) -> int:
-        return 0
+        buckets = self.buckets()
+        winnings = 0
+        for rank, (hand, bet) in enumerate(chain(
+                sorted(buckets['high_card'], key=self.key),
+                sorted(buckets['one_pair'], key=self.key),
+                sorted(buckets['two_pairs'], key=self.key),
+                sorted(buckets['three_of_a_kind'], key=self.key),
+                sorted(buckets['full_house'], key=self.key),
+                sorted(buckets['four_of_a_kind'], key=self.key),
+                sorted(buckets['five_of_a_kind'], key=self.key))):
+            winnings += (rank + 1) * bet
+        return winnings
