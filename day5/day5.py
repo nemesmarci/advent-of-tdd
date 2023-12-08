@@ -25,3 +25,8 @@ class Almanac:
 
     def part_one(self) -> int:
         return min(map(self.location, self.seeds))
+
+    @staticmethod
+    def missing_ranges(rules: list[tuple[range, range]]) -> list[tuple[range, range]]:
+        missing_ranges = []
+        return missing_ranges

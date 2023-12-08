@@ -17,6 +17,16 @@ MAP_RANGES = [
 ]
 LOCATIONS = [82, 43, 86, 35]
 
+MISSING_RANGES = [
+    [(range(0, 50), range(0, 50))],
+    [],
+    [],
+    [(range(0, 18), range(0, 18))],
+    [(range(0, 45), range(0, 45))],
+    [],
+    [(range(0, 56), range(0, 56))]
+]
+
 
 class TestAlmanac(unittest.TestCase):
     @classmethod
@@ -34,6 +44,10 @@ class TestAlmanac(unittest.TestCase):
 
     def testPart1(self):
         self.assertEqual(self.almanac.part_one(), 35)
+
+    def testAddMissingRanges(self):
+        for rules, expected in zip(self.almanac.map_ranges, MISSING_RANGES):
+            self.assertListEqual(self.almanac.missing_ranges(rules), expected)
 
 
 if __name__ == '__main__':
