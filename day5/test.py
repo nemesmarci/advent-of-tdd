@@ -36,7 +36,10 @@ class TestAlmanac(unittest.TestCase):
 
     def testParse(self):
         self.assertListEqual(self.almanac.seeds, SEEDS)
-        self.assertListEqual(self.almanac.map_ranges, MAP_RANGES)
+        extended_ranges = [sorted(original + missing, key=lambda x: x[0].start)
+                           for original, missing
+                           in zip(MAP_RANGES, MISSING_RANGES)]
+        self.assertListEqual(self.almanac.map_ranges, extended_ranges)
 
     def testLocation(self):
         for seed, location in zip(self.almanac.seeds, LOCATIONS):
@@ -45,8 +48,8 @@ class TestAlmanac(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.almanac.part_one(), 35)
 
-    def testAddMissingRanges(self):
-        for rules, expected in zip(self.almanac.map_ranges, MISSING_RANGES):
+    def testMissingRanges(self):
+        for rules, expected in zip(MAP_RANGES, MISSING_RANGES):
             self.assertListEqual(self.almanac.missing_ranges(rules), expected)
 
     def testTargetRanges(self):
