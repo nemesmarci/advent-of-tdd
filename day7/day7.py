@@ -35,11 +35,11 @@ class CamelCards:
         return buckets
 
     @staticmethod
-    def key(item: tuple[str, int]) -> str:
-        return item[0].translate(str.maketrans('TJQKA', 'ABCDE'))
+    def get_key(mapped: str) -> Callable[[tuple[str, int]], str]:
+        return lambda item: item[0].translate(str.maketrans('TJQKA', mapped))
 
     def part_one(self) -> int:
-        return self.winnings(self.buckets, self.key)
+        return self.winnings(self.buckets, self.get_key('ABCDE'))
 
     @staticmethod
     def joker_bucket(hand: str) -> str:
@@ -71,12 +71,8 @@ class CamelCards:
             buckets[self.joker_bucket(hand)].append((hand, bet))
         return buckets
 
-    @staticmethod
-    def joker_key(item: tuple[str, int]) -> str:
-        return item[0].translate(str.maketrans('TJQKA', 'A0CDE'))
-
     def part_two(self) -> int:
-        return self.winnings(self.joker_buckets, self.joker_key)
+        return self.winnings(self.joker_buckets, self.get_key('A0CDE'))
 
     def winnings(self, bucket_fun: Callable, key_fun: Callable) -> int:
         buckets = bucket_fun()
