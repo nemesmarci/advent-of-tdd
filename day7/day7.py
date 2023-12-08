@@ -1,4 +1,4 @@
-from typing import Iterable, Callable
+from typing import Iterable
 from collections import defaultdict, Counter
 from itertools import chain
 
@@ -12,20 +12,13 @@ class CamelCards:
             self.hands.append(hand)
             self.bets.append(int(bet))
 
-    @staticmethod
-    def get_key(mapped: str) -> Callable[[tuple[str, int]], str]:
-        return lambda item: item[0].translate(str.maketrans('TJQKA', mapped))
-
-    @staticmethod
-    def prep(hand: str) -> tuple[Counter[str], int]:
-        return Counter(hand), 0
-
     def part_one(self) -> int:
-        return self.winnings(self.prep, self.get_key('ABCDE'))
+        return self.winnings(joker=False)
 
     @staticmethod
-    def bucket(hand: str, prep_fun: Callable) -> str:
-        cards, jokers = prep_fun(hand)
+    def bucket(hand: str) -> str:
+        cards = Counter(hand)
+        jokers = cards.pop('0', 0)
         if not cards:
             return 'five_of_a_kind'
         match cards.most_common(1)[0][1]:
@@ -46,28 +39,28 @@ class CamelCards:
             case 5:
                 return 'five_of_a_kind'
 
-    @staticmethod
-    def joker_prep(hand: str) -> tuple[Counter[str], int]:
-        cards = Counter(hand)
-        jokers = cards.pop('J', 0)
-        return cards, jokers
-
     def part_two(self) -> int:
-        return self.winnings(self.joker_prep, self.get_key('A0CDE'))
+        return self.winnings(joker=True)
 
-    def winnings(self, prep_fun: Callable, key_fun: Callable) -> int:
+    @staticmethod
+    def key_fun(item: tuple[str, int]):
+        return item[0].translate(str.maketrans('TJQKA', 'ABCDE'))
+
+    def winnings(self, joker: bool) -> int:
         buckets = defaultdict(list)
         for hand, bet in zip(self.hands, self.bets):
-            buckets[self.bucket(hand, prep_fun)].append((hand, bet))
+            if joker:
+                hand = hand.replace('J', '0')
+            buckets[self.bucket(hand)].append((hand, bet))
         winnings = 0
         for rank, (hand, bet) in enumerate(chain(
-                sorted(buckets['high_card'], key=key_fun),
-                sorted(buckets['one_pair'], key=key_fun),
-                sorted(buckets['two_pairs'], key=key_fun),
-                sorted(buckets['three_of_a_kind'], key=key_fun),
-                sorted(buckets['full_house'], key=key_fun),
-                sorted(buckets['four_of_a_kind'], key=key_fun),
-                sorted(buckets['five_of_a_kind'], key=key_fun))):
+                sorted(buckets['high_card'], key=self.key_fun),
+                sorted(buckets['one_pair'], key=self.key_fun),
+                sorted(buckets['two_pairs'], key=self.key_fun),
+                sorted(buckets['three_of_a_kind'], key=self.key_fun),
+                sorted(buckets['full_house'], key=self.key_fun),
+                sorted(buckets['four_of_a_kind'], key=self.key_fun),
+                sorted(buckets['five_of_a_kind'], key=self.key_fun))):
             winnings += (rank + 1) * bet
         return winnings
 

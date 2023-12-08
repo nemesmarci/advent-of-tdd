@@ -19,7 +19,7 @@ BUCKETS = {
 JOKER_BUCKETS = {
     'one_pair': [('32T3K', 765)],
     'two_pairs': [('KK677', 28)],
-    'four_of_a_kind': [('T55J5', 684), ('KTJJT', 220), ('QQQJA', 483)]
+    'four_of_a_kind': [('T5505', 684), ('KT00T', 220), ('QQQ0A', 483)]
 }
 
 MAPPINGS = [
@@ -65,13 +65,12 @@ class TestCards(unittest.TestCase):
 
     def testBucket(self):
         for hand, bucket in MAPPINGS:
-            self.assertEqual(self.cards.bucket(hand, self.cards.prep),
-                             bucket)
+            self.assertEqual(self.cards.bucket(hand), bucket)
 
     def testBuckets(self):
         buckets = defaultdict(list)
         for hand, bet in map(str.split, TEST_DATA):
-            buckets[self.cards.bucket(hand, self.cards.prep)] \
+            buckets[self.cards.bucket(hand)] \
                 .append((hand, int(bet)))
         self.assertDictEqual(buckets, BUCKETS)
 
@@ -80,14 +79,14 @@ class TestCards(unittest.TestCase):
 
     def testJokerBucket(self):
         for hand, bucket in JOKER_MAPPINGS:
-            self.assertEqual(self.cards.bucket(hand, self.cards.joker_prep),
-                             bucket)
+            hand = hand.replace('J', '0')
+            self.assertEqual(self.cards.bucket(hand), bucket)
 
     def testJokerBuckets(self):
         buckets = defaultdict(list)
         for hand, bet in map(str.split, TEST_DATA):
-            buckets[self.cards.bucket(hand, self.cards.joker_prep)] \
-                .append((hand, int(bet)))
+            hand = hand.replace('J', '0')
+            buckets[self.cards.bucket(hand)].append((hand, int(bet)))
         self.assertDictEqual(buckets, JOKER_BUCKETS)
 
     def testPart2(self):
