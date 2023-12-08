@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Iterable, Callable
 from collections import defaultdict, Counter
 from itertools import chain
 
@@ -39,18 +39,7 @@ class CamelCards:
         return item[0].translate(str.maketrans('TJQKA', 'ABCDE'))
 
     def part_one(self) -> int:
-        buckets = self.buckets()
-        winnings = 0
-        for rank, (hand, bet) in enumerate(chain(
-                sorted(buckets['high_card'], key=self.key),
-                sorted(buckets['one_pair'], key=self.key),
-                sorted(buckets['two_pairs'], key=self.key),
-                sorted(buckets['three_of_a_kind'], key=self.key),
-                sorted(buckets['full_house'], key=self.key),
-                sorted(buckets['four_of_a_kind'], key=self.key),
-                sorted(buckets['five_of_a_kind'], key=self.key))):
-            winnings += (rank + 1) * bet
-        return winnings
+        return self.winnings(self.buckets, self.key)
 
     @staticmethod
     def joker_bucket(hand: str) -> str:
@@ -87,15 +76,18 @@ class CamelCards:
         return item[0].translate(str.maketrans('TJQKA', 'A0CDE'))
 
     def part_two(self) -> int:
-        buckets = self.joker_buckets()
+        return self.winnings(self.joker_buckets, self.joker_key)
+
+    def winnings(self, bucket_fun: Callable, key_fun: Callable) -> int:
+        buckets = bucket_fun()
         winnings = 0
         for rank, (hand, bet) in enumerate(chain(
-                sorted(buckets['high_card'], key=self.joker_key),
-                sorted(buckets['one_pair'], key=self.joker_key),
-                sorted(buckets['two_pairs'], key=self.joker_key),
-                sorted(buckets['three_of_a_kind'], key=self.joker_key),
-                sorted(buckets['full_house'], key=self.joker_key),
-                sorted(buckets['four_of_a_kind'], key=self.joker_key),
-                sorted(buckets['five_of_a_kind'], key=self.joker_key))):
+                sorted(buckets['high_card'], key=key_fun),
+                sorted(buckets['one_pair'], key=key_fun),
+                sorted(buckets['two_pairs'], key=key_fun),
+                sorted(buckets['three_of_a_kind'], key=key_fun),
+                sorted(buckets['full_house'], key=key_fun),
+                sorted(buckets['four_of_a_kind'], key=key_fun),
+                sorted(buckets['five_of_a_kind'], key=key_fun))):
             winnings += (rank + 1) * bet
         return winnings
