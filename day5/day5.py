@@ -38,4 +38,5 @@ class Almanac:
         return missing_ranges
 
     def target_ranges(self) -> list[range]:
-        return []
+        return [range(start, start + length)
+                for start, length in zip(self.seeds[0::2], self.seeds[1::2])]
