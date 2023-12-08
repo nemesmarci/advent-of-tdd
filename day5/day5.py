@@ -68,4 +68,7 @@ class Almanac:
         return [r for r in new_ranges if r]
 
     def part_two(self) -> int:
-        return 0
+        target_ranges = self.target_ranges()
+        for rules in self.map_ranges:
+            target_ranges = self.transform_ranges(target_ranges, rules)
+        return min(r.start for r in target_ranges)
