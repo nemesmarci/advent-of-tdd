@@ -15,3 +15,6 @@ class BoatRace:
             if BoatRace.win(time_charging, max_time, record):
                 num_wins += 1
         return num_wins
+
+    def part_one(self) -> int:
+        return 0
