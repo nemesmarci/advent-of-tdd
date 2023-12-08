@@ -72,3 +72,10 @@ class Almanac:
         for rules in self.map_ranges:
             target_ranges = self.transform_ranges(target_ranges, rules)
         return min(r.start for r in target_ranges)
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        almanac = Almanac(data)
+        print(almanac.part_one())
+        print(almanac.part_two())
