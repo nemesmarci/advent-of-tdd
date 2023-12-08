@@ -23,4 +23,5 @@ class BoatRace:
                     for time, record in zip(self.times, self.records))
 
     def part_two(self) -> int:
-        return 0
+        return self.wins(int(''.join(map(str, self.times))),
+                         int(''.join(map(str, self.records))))
