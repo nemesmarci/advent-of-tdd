@@ -25,3 +25,10 @@ class BoatRace:
     def part_two(self) -> int:
         return self.wins(int(''.join(map(str, self.times))),
                          int(''.join(map(str, self.records))))
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        race = BoatRace(data)
+    print(race.part_one())
+    print(race.part_two())
