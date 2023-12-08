@@ -29,4 +29,10 @@ class Almanac:
     @staticmethod
     def missing_ranges(rules: list[tuple[range, range]]) -> list[tuple[range, range]]:
         missing_ranges = []
+        prev_stop = 0
+        for src_range in (rule[0] for rule in sorted(rules, key=lambda x: x[0].start)):
+            if prev_stop != src_range.start:
+                missing_ranges.append((range(prev_stop, src_range.start),
+                                       range(prev_stop, src_range.start)))
+            prev_stop = src_range.stop
         return missing_ranges
