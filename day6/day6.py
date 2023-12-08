@@ -1,3 +1,5 @@
+from math import prod
+
 class BoatRace:
     def __init__(self, data) -> None:
         times, records = map(str.split, data)
@@ -17,4 +19,5 @@ class BoatRace:
         return num_wins
 
     def part_one(self) -> int:
-        return 0
+        return prod(self.wins(time, record)
+                    for time, record in zip(self.times, self.records))
