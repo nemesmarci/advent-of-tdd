@@ -36,3 +36,6 @@ class Almanac:
                                        range(prev_stop, src_range.start)))
             prev_stop = src_range.stop
         return missing_ranges
+
+    def target_ranges(self) -> list[range]:
+        return []

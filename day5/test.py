@@ -49,6 +49,11 @@ class TestAlmanac(unittest.TestCase):
         for rules, expected in zip(self.almanac.map_ranges, MISSING_RANGES):
             self.assertListEqual(self.almanac.missing_ranges(rules), expected)
 
+    def testTargetRanges(self):
+        self.assertEqual(self.almanac.target_ranges(),
+                         [range(SEEDS[0], SEEDS[0] + SEEDS[1]),
+                          range(SEEDS[2], SEEDS[2] + SEEDS[3])])
+
 
 if __name__ == '__main__':
     unittest.main()
