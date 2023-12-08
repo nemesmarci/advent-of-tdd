@@ -13,6 +13,8 @@ class Almanac:
                     dest, source, length = map(int, line.split())
                     rules.append((range(source, source + length),
                                   range(dest, dest + length)))
+            rules.extend(self.missing_ranges(rules))
+            rules.sort(key=lambda x: x[0].start)
             self.map_ranges.append(rules)
 
     def location(self, target: int) -> int:
