@@ -67,6 +67,9 @@ class TestAlmanac(unittest.TestCase):
         self.assertListEqual(
             self.almanac.transform_ranges(original_ranges, rules), expected)
 
+    def testPart2(self):
+        self.assertEqual(self.almanac.part_two(), 46)
+
 
 if __name__ == '__main__':
     unittest.main()

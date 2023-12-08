@@ -66,3 +66,6 @@ class Almanac:
                 else:
                     new_ranges.append(range(new_start, rules[i][1].stop))
         return [r for r in new_ranges if r]
+
+    def part_two(self) -> int:
+        return 0
