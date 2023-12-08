@@ -32,3 +32,6 @@ class CamelCards:
         for hand, bet in zip(self.hands, self.bets):
             buckets[self.bucket(hand)].append((hand, bet))
         return buckets
+
+    def part_one(self) -> int:
+        return 0

@@ -38,6 +38,9 @@ class TestCards(unittest.TestCase):
     def testBuckets(self):
         self.assertDictEqual(self.cards.buckets(), BUCKETS)
 
+    def testPart1(self):
+        self.assertEqual(self.cards.part_one(), 6440)
+
 
 if __name__ == '__main__':
     unittest.main()
