@@ -7,3 +7,7 @@ class BoatRace:
     @staticmethod
     def win(time_charging: int, max_time: int, record: int) -> bool:
         return time_charging * (max_time - time_charging) > record
+
+    @staticmethod
+    def wins(max_time: int, record: int) -> int:
+        return 0

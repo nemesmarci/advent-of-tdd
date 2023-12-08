@@ -26,6 +26,11 @@ class TestBoatRace(unittest.TestCase):
                 self.assertEqual(self.race.win(time_taken, time, record),
                                  wins[time_taken])
 
+    def testWins(self):
+        for time, record, wins in zip(TIMES, RECORDS, WINS):
+            self.assertEqual(self.race.wins(time, record),
+                             len(list(filter(bool, WINS))))
+
 
 if __name__ == '__main__':
     unittest.main()
