@@ -34,6 +34,9 @@ class TestBoatRace(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.race.part_one(), 4 * 8 * 9)
 
+    def testPart2(self):
+        self.assertEqual(self.race.part_two(), 71503)
+
 
 if __name__ == '__main__':
     unittest.main()

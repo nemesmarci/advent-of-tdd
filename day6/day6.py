@@ -21,3 +21,6 @@ class BoatRace:
     def part_one(self) -> int:
         return prod(self.wins(time, record)
                     for time, record in zip(self.times, self.records))
+
+    def part_two(self) -> int:
+        return 0
