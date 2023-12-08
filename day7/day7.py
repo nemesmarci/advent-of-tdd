@@ -70,3 +70,10 @@ class CamelCards:
                 sorted(buckets['five_of_a_kind'], key=key_fun))):
             winnings += (rank + 1) * bet
         return winnings
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        cards = CamelCards(data.readlines())
+    print(cards.part_one())
+    print(cards.part_two())
