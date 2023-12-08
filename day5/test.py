@@ -57,6 +57,16 @@ class TestAlmanac(unittest.TestCase):
                          [range(SEEDS[0], SEEDS[0] + SEEDS[1]),
                           range(SEEDS[2], SEEDS[2] + SEEDS[3])])
 
+    def testTransformRanges(self):
+        original_ranges = [range(5, 15), range(25, 35), range(45, 55)]
+        rules = [(range(0, 10), range(100, 110)),
+                 (range(10, 50), range(110, 150)),
+                 (range(50, 60), range(150, 160))]
+        expected = [range(105, 110), range(110, 115), range(125, 135),
+                    range(145, 150), range(150, 155)]
+        self.assertListEqual(
+            self.almanac.transform_ranges(original_ranges, rules), expected)
+
 
 if __name__ == '__main__':
     unittest.main()

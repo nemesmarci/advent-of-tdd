@@ -42,3 +42,7 @@ class Almanac:
     def target_ranges(self) -> list[range]:
         return [range(start, start + length)
                 for start, length in zip(self.seeds[0::2], self.seeds[1::2])]
+
+    @staticmethod
+    def transform_ranges(original_ranges: list[range], rules):
+        return []
