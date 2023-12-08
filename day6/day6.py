@@ -1,5 +1,6 @@
 from math import prod
 
+
 class BoatRace:
     def __init__(self, data) -> None:
         times, records = map(str.split, data)
