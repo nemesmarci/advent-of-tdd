@@ -9,3 +9,6 @@ class CamelCards:
             hand, bet = line.split()
             self.hands.append(hand)
             self.bets.append(int(bet))
+
+    def buckets(self) -> dict[str, list[tuple[str, int]]]:
+        return {}

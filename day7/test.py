@@ -9,6 +9,12 @@ TEST_DATA = [
     'QQQJA 483'
 ]
 
+BUCKETS = {
+    'one_pair': [('32T3K', 765)],
+    'two_pair': [('KK677', 28), ('KTJJT', 220)],
+    'three_of_a_kind': [('T55J5', 684), ('QQQJA', 483)]
+}
+
 
 class TestCards(unittest.TestCase):
     @classmethod
@@ -20,6 +26,9 @@ class TestCards(unittest.TestCase):
         bets = [int(line.split()[1]) for line in TEST_DATA]
         self.assertListEqual(self.cards.hands, hands)
         self.assertListEqual(self.cards.bets, bets)
+
+    def testBuckets(self):
+        self.assertDictEqual(self.cards.buckets(), BUCKETS)
 
 
 if __name__ == '__main__':
