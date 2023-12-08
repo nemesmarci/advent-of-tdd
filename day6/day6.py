@@ -10,4 +10,8 @@ class BoatRace:
 
     @staticmethod
     def wins(max_time: int, record: int) -> int:
-        return 0
+        num_wins = 0
+        for time_charging in range(0, max_time + 1):
+            if BoatRace.win(time_charging, max_time, record):
+                num_wins += 1
+        return num_wins

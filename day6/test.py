@@ -29,7 +29,7 @@ class TestBoatRace(unittest.TestCase):
     def testWins(self):
         for time, record, wins in zip(TIMES, RECORDS, WINS):
             self.assertEqual(self.race.wins(time, record),
-                             len(list(filter(bool, WINS))))
+                             len(list(filter(bool, wins))))
 
 
 if __name__ == '__main__':
