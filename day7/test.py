@@ -41,6 +41,9 @@ class TestCards(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.cards.part_one(), 6440)
 
+    def testPart2(self):
+        self.assertEqual(self.cards.part_two(), 5905)
+
 
 if __name__ == '__main__':
     unittest.main()

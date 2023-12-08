@@ -51,3 +51,6 @@ class CamelCards:
                 sorted(buckets['five_of_a_kind'], key=self.key))):
             winnings += (rank + 1) * bet
         return winnings
+
+    def part_two(self) -> int:
+        return 0
