@@ -11,7 +11,7 @@ TEST_DATA = [
 
 BUCKETS = {
     'one_pair': [('32T3K', 765)],
-    'two_pair': [('KK677', 28), ('KTJJT', 220)],
+    'two_pairs': [('KK677', 28), ('KTJJT', 220)],
     'three_of_a_kind': [('T55J5', 684), ('QQQJA', 483)]
 }
 
@@ -26,6 +26,14 @@ class TestCards(unittest.TestCase):
         bets = [int(line.split()[1]) for line in TEST_DATA]
         self.assertListEqual(self.cards.hands, hands)
         self.assertListEqual(self.cards.bets, bets)
+
+    def testBucket(self):
+        self.assertEqual(self.cards.bucket('23456'), 'high_card')
+        self.assertEqual(self.cards.bucket('789T7'), 'one_pair')
+        self.assertEqual(self.cards.bucket('JJQKK'), 'two_pairs')
+        self.assertEqual(self.cards.bucket('AAA23'), 'three_of_a_kind')
+        self.assertEqual(self.cards.bucket('55A55'), 'four_of_a_kind')
+        self.assertEqual(self.cards.bucket('KKKKK'), 'five_of_a_kind')
 
     def testBuckets(self):
         self.assertDictEqual(self.cards.buckets(), BUCKETS)
