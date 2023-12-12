@@ -1,4 +1,5 @@
 from typing import Sequence
+from itertools import cycle
 
 
 class Map:
@@ -16,4 +17,9 @@ class Map:
         return self.nodes[node][instruction == 'R']
 
     def traverse(self, start: str, end: str) -> int:
-        return 0
+        instructions = cycle(self.instructions)
+        steps = 0
+        while start != end:
+            steps += 1
+            start = self.step(start, next(instructions))
+        return steps
