@@ -13,6 +13,24 @@ SEQUENCES = [
     [10, 13, 16, 21, 30, 45]
 ]
 
+NEW_SEQUENCES = [
+    [
+        [3, 3, 3, 3, 3],
+        [0, 0, 0, 0]
+    ],
+    [
+        [2, 3, 4, 5, 6],
+        [1, 1, 1, 1],
+        [0, 0, 0]
+    ],
+    [
+        [3, 3, 5, 9, 15],
+        [0, 2, 4, 6],
+        [2, 2, 2],
+        [0, 0]
+    ]
+]
+
 
 class TestOasis(unittest.TestCase):
     @classmethod
@@ -21,6 +39,12 @@ class TestOasis(unittest.TestCase):
 
     def testParse(self):
         self.assertListEqual(SEQUENCES, self.oasis.sequences)
+
+    def testNewSequence(self):
+        for sequence, new_sequences in zip(SEQUENCES, NEW_SEQUENCES):
+            for new_sequence in new_sequences:
+                sequence = self.oasis.new_sequence(sequence)
+                self.assertListEqual(new_sequence, sequence)
 
 
 if __name__ == '__main__':
