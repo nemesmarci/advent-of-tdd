@@ -55,6 +55,9 @@ class TestOasis(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.oasis.part_one(), 114)
 
+    def testPart2(self):
+        self.assertEqual(self.oasis.part_two(), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

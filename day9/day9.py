@@ -21,6 +21,9 @@ class Oasis:
     def part_one(self) -> int:
         return sum(sum(self.predict(sequence)) for sequence in self.sequences)
 
+    def part_two(self) -> int:
+        return 0
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
