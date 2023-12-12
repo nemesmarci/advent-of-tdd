@@ -24,6 +24,9 @@ class Map:
             start = self.step(start, next(instructions))
         return steps
 
+    def start_nodes(self) -> list[str]:
+        return [""]
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
