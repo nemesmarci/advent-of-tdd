@@ -58,9 +58,9 @@ class TestMap(unittest.TestCase):
 
     def testTraverse(self):
         m = Map(TEST_DATA1)
-        self.assertEqual(m.traverse('AAA', 'ZZZ'), 2)
+        self.assertEqual(m.traverse('AAA', lambda x: x == 'ZZZ'), 2)
         m = Map(TEST_DATA2)
-        self.assertEqual(m.traverse('AAA', 'ZZZ'), 6)
+        self.assertEqual(m.traverse('AAA', lambda x: x == 'ZZZ'), 6)
 
     def testStartNodes(self):
         m = Map(TEST_DATA3)

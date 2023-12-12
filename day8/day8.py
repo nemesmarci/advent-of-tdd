@@ -1,4 +1,4 @@
-from typing import Sequence
+from typing import Sequence, Callable
 from itertools import cycle
 
 
@@ -16,10 +16,10 @@ class Map:
     def step(self, node: str, instruction: str) -> str:
         return self.nodes[node][instruction == 'R']
 
-    def traverse(self, start: str, end: str) -> int:
+    def traverse(self, start: str, end: Callable[[str], bool]) -> int:
         instructions = cycle(self.instructions)
         steps = 0
-        while start != end:
+        while not(end(start)):
             steps += 1
             start = self.step(start, next(instructions))
         return steps
@@ -34,4 +34,4 @@ class Map:
 if __name__ == '__main__':
     with open('input.txt') as data:
         m = Map(data.readlines())
-    print(m.traverse('AAA', 'ZZZ'))
+    print(m.traverse('AAA', lambda x: x == 'ZZZ'))
