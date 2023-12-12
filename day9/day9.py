@@ -11,15 +11,15 @@ class Oasis:
         return [sequence[i] - sequence[i - 1] for i in range(1, len(sequence))]
 
     @staticmethod
-    def predict(sequence: Sequence[int]) -> int:
-        prediciton = 0
+    def predict(sequence: Sequence[int]) -> Sequence[int]:
+        predictions = []
         while not all(x == 0 for x in sequence):
-            prediciton += sequence[-1]
+            predictions.append(sequence[-1])
             sequence = Oasis.new_sequence(sequence)
-        return prediciton
+        return predictions
 
     def part_one(self) -> int:
-        return sum(map(self.predict, self.sequences))
+        return sum(sum(self.predict(sequence)) for sequence in self.sequences)
 
 
 if __name__ == '__main__':

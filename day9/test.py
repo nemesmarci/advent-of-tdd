@@ -50,7 +50,7 @@ class TestOasis(unittest.TestCase):
 
     def testPrediction(self):
         for sequence, prediction in zip(SEQUENCES, PREDICTIONS):
-            self.assertEqual(self.oasis.predict(sequence), prediction)
+            self.assertEqual(sum(self.oasis.predict(sequence)), prediction)
 
     def testPart1(self):
         self.assertEqual(self.oasis.part_one(), 114)
