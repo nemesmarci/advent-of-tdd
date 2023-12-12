@@ -13,4 +13,4 @@ class Map:
             self.nodes[starting] = (left, right)
 
     def step(self, node: str, instruction: str) -> str:
-        return ''
+        return self.nodes[node][instruction == 'R']
