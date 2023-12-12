@@ -44,7 +44,7 @@ class TestOasis(unittest.TestCase):
         for sequence, new_sequences in zip(SEQUENCES, NEW_SEQUENCES):
             for new_sequence in new_sequences:
                 sequence = self.oasis.new_sequence(sequence)
-                self.assertListEqual(new_sequence, sequence)
+                self.assertSequenceEqual(new_sequence, sequence)
 
 
 if __name__ == '__main__':
