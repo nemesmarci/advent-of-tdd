@@ -17,3 +17,6 @@ class Oasis:
             prediciton += sequence[-1]
             sequence = Oasis.new_sequence(sequence)
         return prediciton
+
+    def part_one(self) -> int:
+        return 0

@@ -52,6 +52,9 @@ class TestOasis(unittest.TestCase):
         for sequence, prediction in zip(SEQUENCES, PREDICTIONS):
             self.assertEqual(self.oasis.predict(sequence), prediction)
 
+    def testPart1(self):
+        self.assertEqual(self.oasis.part_one(), 114)
+
 
 if __name__ == '__main__':
     unittest.main()
