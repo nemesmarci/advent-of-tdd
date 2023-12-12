@@ -11,3 +11,6 @@ class Map:
             left = left.strip('(')
             right = right.strip(')')
             self.nodes[starting] = (left, right)
+
+    def step(self, node: str, instruction: str) -> str:
+        return ''

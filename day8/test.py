@@ -30,6 +30,11 @@ class TestMap(unittest.TestCase):
         self.assertEqual(m.instructions, TEST_DATA1[0])
         self.assertDictEqual(m.nodes, MAP1)
 
+    def testStep(self):
+        m = Map(TEST_DATA1)
+        self.assertEqual(m.step('AAA', 'R'), 'CCC')
+        self.assertEqual(m.step('CCC', 'L'), 'ZZZ')
+
 
 if __name__ == '__main__':
     unittest.main()
