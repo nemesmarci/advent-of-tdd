@@ -23,10 +23,17 @@ class Oasis:
                    for sequence in self.sequences)
 
     def part_two(self) -> int:
-        return 0
+        values = 0
+        for sequence in self.sequences:
+            n = 0
+            for x in self.predict(sequence, 0)[::-1]:
+                n = x - n
+            values += n
+        return values
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         oasis = Oasis(data)
     print(oasis.part_one())
+    print(oasis.part_two())
