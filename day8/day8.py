@@ -25,7 +25,7 @@ class Map:
         return steps
 
     def start_nodes(self) -> list[str]:
-        return [""]
+        return [node for node in self.nodes if node[-1] == 'A']
 
 
 if __name__ == '__main__':
