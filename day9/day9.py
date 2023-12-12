@@ -1,4 +1,5 @@
-from typing import Iterable, Sequence
+from typing import Iterable, Sequence, Callable
+from operator import add, sub
 
 
 class Oasis:
@@ -19,15 +20,17 @@ class Oasis:
         return predictions
 
     def part_one(self) -> int:
-        return sum(sum(self.predict(sequence, -1))
-                   for sequence in self.sequences)
+        return self.solve(add, -1)
 
     def part_two(self) -> int:
+        return self.solve(sub, 0)
+
+    def solve(self, op: Callable[[int, int], int], index: int) -> int:
         values = 0
         for sequence in self.sequences:
             n = 0
-            for x in self.predict(sequence, 0)[::-1]:
-                n = x - n
+            for x in self.predict(sequence, index)[::-1]:
+                n = op(x, n)
             values += n
         return values
 
