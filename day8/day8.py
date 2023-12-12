@@ -14,3 +14,6 @@ class Map:
 
     def step(self, node: str, instruction: str) -> str:
         return self.nodes[node][instruction == 'R']
+
+    def traverse(self, start: str, end: str) -> int:
+        return 0
