@@ -31,6 +31,8 @@ NEW_SEQUENCES = [
     ]
 ]
 
+PREDICTIONS = [18, 28, 68]
+
 
 class TestOasis(unittest.TestCase):
     @classmethod
@@ -45,6 +47,10 @@ class TestOasis(unittest.TestCase):
             for new_sequence in new_sequences:
                 sequence = self.oasis.new_sequence(sequence)
                 self.assertSequenceEqual(new_sequence, sequence)
+
+    def testPrediction(self):
+        for sequence, prediction in zip(SEQUENCES, PREDICTIONS):
+            self.assertEqual(self.oasis.predict(sequence), prediction)
 
 
 if __name__ == '__main__':

@@ -9,3 +9,7 @@ class Oasis:
     @staticmethod
     def new_sequence(sequence: Sequence[int]) -> Sequence[int]:
         return [sequence[i] - sequence[i - 1] for i in range(1, len(sequence))]
+
+    @staticmethod
+    def predict(sequence: Sequence[int]) -> int:
+        return 0
