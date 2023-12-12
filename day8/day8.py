@@ -1,5 +1,6 @@
 from typing import Sequence, Callable
 from itertools import cycle
+from math import lcm
 
 
 class Map:
@@ -28,10 +29,13 @@ class Map:
         return [node for node in self.nodes if node[-1] == 'A']
 
     def part_two(self) -> int:
-        return 0
+        steps_taken = [self.traverse(node, lambda x: x[-1] == 'Z')
+                       for node in self.start_nodes()]
+        return lcm(*steps_taken)
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         m = Map(data.readlines())
     print(m.traverse('AAA', lambda x: x == 'ZZZ'))
+    print(m.part_two())
