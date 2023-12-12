@@ -23,3 +23,9 @@ class Map:
             steps += 1
             start = self.step(start, next(instructions))
         return steps
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        m = Map(data.readlines())
+    print(m.traverse('AAA', 'ZZZ'))
