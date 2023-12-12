@@ -66,6 +66,10 @@ class TestMap(unittest.TestCase):
         m = Map(TEST_DATA3)
         self.assertListEqual(m.start_nodes(), ['11A', '22A'])
 
+    def testPart2(self):
+        m = Map(TEST_DATA3)
+        self.assertEqual(m.part_two(), 6)
+
 
 if __name__ == '__main__':
     unittest.main()

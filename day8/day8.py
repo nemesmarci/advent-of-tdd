@@ -27,6 +27,9 @@ class Map:
     def start_nodes(self) -> list[str]:
         return [node for node in self.nodes if node[-1] == 'A']
 
+    def part_two(self) -> int:
+        return 0
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
