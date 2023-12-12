@@ -12,4 +12,8 @@ class Oasis:
 
     @staticmethod
     def predict(sequence: Sequence[int]) -> int:
-        return 0
+        prediciton = 0
+        while not all(x == 0 for x in sequence):
+            prediciton += sequence[-1]
+            sequence = Oasis.new_sequence(sequence)
+        return prediciton
