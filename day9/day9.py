@@ -19,4 +19,10 @@ class Oasis:
         return prediciton
 
     def part_one(self) -> int:
-        return 0
+        return sum(map(self.predict, self.sequences))
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        oasis = Oasis(data)
+    print(oasis.part_one())
