@@ -18,12 +18,18 @@ AREA = {
     (4, 0): '.', (4, 1): '.', (4, 2): '.', (4, 3): '.', (4, 4): '.',
 }
 
+LOOP = {(1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (2, 1)}
+
 
 class TestMaze(unittest.TestCase):
     def testParse(self):
         maze = Maze(TEST_DATA)
         self.assertDictEqual(maze.area, AREA)
         self.assertEqual(maze.start, (1, 1))
+
+    def testLoop(self):
+        maze = Maze(TEST_DATA)
+        self.assertSetEqual(maze.loop(), LOOP)
 
 
 if __name__ == '__main__':

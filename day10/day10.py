@@ -9,3 +9,6 @@ class Maze:
                 if c == 'S':
                     self.start: tuple[int, int] = y, x
                 self.area[(y, x)] = c
+
+    def loop(self) -> set[tuple[int, int]]:
+        return set()
