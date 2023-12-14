@@ -29,4 +29,19 @@ class Maze:
         return set()
 
     def start_pipe_shape(self) -> str:
-        return '|'
+        up = self.area[self.start[0] - 1, self.start[1]] in '|7F'
+        left = self.area[self.start[0], self.start[1] - 1] in '-LF'
+        right = self.area[self.start[0], self.start[1] + 1] in '-J7'
+        down = self.area[self.start[0] + 1, self.start[1]] in '|LJ'
+        if up and down:
+            return '|'
+        if up and left:
+            return 'J'
+        if up and right:
+            return 'L'
+        if left and right:
+            return '-'
+        if left and down:
+            return '7'
+        if down and right:
+            return 'F'
