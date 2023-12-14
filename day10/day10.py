@@ -9,6 +9,7 @@ class Maze:
                 if c == 'S':
                     self.start: tuple[int, int] = y, x
                 self.area[(y, x)] = c
+        self.area[self.start] = self.start_pipe_shape()
 
     def next_in_loop(self, node: tuple[int, int], direction: str) -> tuple[tuple[int, int], str]:
         if direction == 'N':
