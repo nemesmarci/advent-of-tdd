@@ -9,3 +9,7 @@ class Springs:
             t, d = line.strip().split()
             self.rows.append(t)
             self.descriptions.append(list(map(int, d.split(','))))
+
+    @staticmethod
+    def possible_solutions(row: str, description: list[int]) -> int:
+        return 0
