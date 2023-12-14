@@ -1,4 +1,5 @@
 from typing import Iterable
+from heapq import heappush, heappop
 
 
 class Maze:
@@ -9,6 +10,8 @@ class Maze:
                 if c == 'S':
                     self.start: tuple[int, int] = y, x
                 self.area[(y, x)] = c
+        self.max_y = y * 3 + 3
+        self.max_x = x * 3 + 3
         self.area[self.start] = self.start_pipe_shape()
 
     def next_in_loop(self, node: tuple[int, int], direction: str) -> tuple[tuple[int, int], str]:
@@ -82,8 +85,63 @@ class Maze:
                 zoomed_in.add((3 * y + 1, 3 * x + 2))
         return zoomed_in
 
+    @staticmethod
+    def get_neighbours(current):
+        return ((current[0] - 1, current[1]),
+                (current[0], current[1] - 1),
+                (current[0], current[1] + 1),
+                (current[0] + 1, current[1]))
+
+    def enclosed(self, tile, loop):
+        seen = set()
+        heap = []
+        heappush(heap, tile)
+        while heap:
+            cur_node = heappop(heap)
+            if cur_node in seen:
+                continue
+            seen.add(cur_node)
+            neighbours = self.get_neighbours(cur_node)
+            for n in neighbours:
+                if not 0 <= n[0] < self.max_y or not 0 <= n[1] < self.max_x:
+                    return False
+                if n not in seen and n not in loop:
+                    heappush(heap, n)
+        return True
+
+    def fill(self, start, loop):
+        seen = set()
+        heap = []
+        heappush(heap, start)
+        while heap:
+            cur_node = heappop(heap)
+            if cur_node in seen:
+                continue
+            seen.add(cur_node)
+            neighbours = self.get_neighbours(cur_node)
+            for n in neighbours:
+                if n not in seen and 0 <= n[0] < self.max_y and 0 <= n[1] < self.max_x and n not in loop:
+                    heappush(heap, n)
+        return seen
+
     def enclosed_tiles(self) -> set[tuple[int, int]]:
-        return set()
+        enclosed_tiles = set()
+        enclosed_zoom = set()
+        free_zoom = set()
+        loop = self.loop()
+        zoomed_in = self.zoom()
+        for tile in filter(lambda x: x not in loop, self.area):
+            zoom = tile[0] * 3, tile[1] * 3
+            if zoom in enclosed_zoom:
+                enclosed_tiles.add(tile)
+            elif zoom in free_zoom:
+                continue
+            elif self.enclosed(zoom, zoomed_in):
+                enclosed_tiles.add(tile)
+                enclosed_zoom |= self.fill(zoom, zoomed_in)
+            else:
+                free_zoom |= self.fill(zoom, zoomed_in)
+        return enclosed_tiles
 
 
 if __name__ == '__main__':
