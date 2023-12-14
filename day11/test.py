@@ -31,6 +31,9 @@ class TestGalaxy(unittest.TestCase):
             for x in range(len(IMAGE[y])):
                 self.assertEqual(IMAGE[y][x], self.image.area[(y, x)])
 
+    def testPart1(self):
+        self.assertEqual(self.image.part_one(), 374)
+
 
 if __name__ == '__main__':
     unittest.main()

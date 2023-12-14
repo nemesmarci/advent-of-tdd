@@ -12,3 +12,6 @@ class Image:
                     self.galaxies.add((y, x))
         self.max_y: int = y + 1
         self.max_x: int = x + 1
+
+    def part_one(self) -> int:
+        return 0
