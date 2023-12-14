@@ -27,7 +27,19 @@ class Maze:
         return next_node, dirs[self.area[next_node]]
 
     def loop(self) -> set[tuple[int, int]]:
-        return set()
+        visited = {self.start}
+        if self.area[self.start] in '|LJ':
+            cur_dir = 'N'
+        elif self.area[self.start] in 'F7':
+            cur_dir = 'S'
+        else:
+            cur_dir = 'E'
+        cur_node = self.start
+        while True:
+            cur_node, cur_dir = self.next_in_loop(cur_node, cur_dir)
+            if cur_node == self.start:
+                return visited
+            visited.add(cur_node)
 
     def start_pipe_shape(self) -> str:
         up = self.area[self.start[0] - 1, self.start[1]] in '|7F'
