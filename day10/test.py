@@ -52,6 +52,9 @@ class TestMaze(unittest.TestCase):
             maze = Maze(area)
             self.assertEqual(maze.start_pipe_shape(), shape)
 
+    def testPart1(self):
+        self.assertEqual(self.maze.part_one(), 4)
+
 
 if __name__ == '__main__':
     unittest.main()

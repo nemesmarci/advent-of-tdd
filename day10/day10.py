@@ -58,3 +58,6 @@ class Maze:
             return '7'
         if down and right:
             return 'F'
+
+    def part_one(self) -> int:
+        return 0
