@@ -14,10 +14,12 @@ class Image:
         self.max_x: int = x + 1
 
     def empty_rows(self) -> set[int]:
-        return set()
+        return {y for y in range(self.max_y)
+                if all(self.area[(y, x)] == '.' for x in range(self.max_x))}
 
     def empty_cols(self) -> set[int]:
-        return set()
+        return {x for x in range(self.max_x)
+                      if all(self.area[(y, x)] == '.' for y in range(self.max_y))}
 
     def part_one(self) -> int:
         return 0
