@@ -42,10 +42,14 @@ class Maze:
             visited.add(cur_node)
 
     def start_pipe_shape(self) -> str:
-        up = self.area[self.start[0] - 1, self.start[1]] in '|7F'
-        left = self.area[self.start[0], self.start[1] - 1] in '-LF'
-        right = self.area[self.start[0], self.start[1] + 1] in '-J7'
-        down = self.area[self.start[0] + 1, self.start[1]] in '|LJ'
+        up = self.start[0] - 1, self.start[1]
+        up = up in self.area and self.area[up] in '|7F'
+        left = self.start[0], self.start[1] - 1
+        left = left in self.area and self.area[left] in '-LF'
+        right = self.start[0], self.start[1] + 1
+        right = right in self.area and self.area[right] in '-J7'
+        down = self.start[0] + 1, self.start[1]
+        down = down in self.area and self.area[down] in '|LJ'
         if up and down:
             return '|'
         if up and left:
@@ -60,4 +64,10 @@ class Maze:
             return 'F'
 
     def part_one(self) -> int:
-        return 0
+        return len(self.loop()) // 2
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        maze = Maze(data)
+        print(maze.part_one())

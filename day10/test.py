@@ -2,7 +2,7 @@ import unittest
 from day10 import Maze
 
 
-TEST_DATA = [
+TEST_DATA_1 = [
     ".....",
     ".S-7.",
     ".|.|.",
@@ -29,11 +29,19 @@ START_PIPE_TEST = [
     (['...', '-S.', '.|.'], '7')
 ]
 
+TEST_DATA_2 = [
+    '..F7.',
+    '.FJ|.',
+    'SJ.L7',
+    '|F--J',
+    'LJ...'
+]
+
 
 class TestMaze(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.maze = Maze(TEST_DATA)
+        cls.maze = Maze(TEST_DATA_1)
 
     def testParse(self):
         self.assertDictEqual(self.maze.area, AREA)
@@ -54,6 +62,8 @@ class TestMaze(unittest.TestCase):
 
     def testPart1(self):
         self.assertEqual(self.maze.part_one(), 4)
+        maze = Maze(TEST_DATA_2)
+        self.assertEqual(maze.part_one(), 8)
 
 
 if __name__ == '__main__':
