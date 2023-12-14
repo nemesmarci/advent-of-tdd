@@ -55,6 +55,20 @@ MAZE_2 = [
     'LJ...'
 ]
 
+MAZE_3 = [
+    '...........',
+    '.S-------7.',
+    '.|F-----7|.',
+    '.||.....||.',
+    '.||.....||.',
+    '.|L-7.F-J|.',
+    '.|..|.|..|.',
+    '.L--J.L--J.',
+    '...........'
+]
+
+ENCLOSED_1 = {(6, 2), (6, 3), (6, 7), (6, 8)}
+
 
 class TestMaze1(unittest.TestCase):
     @classmethod
@@ -95,6 +109,15 @@ class TestUniqueMaze(unittest.TestCase):
         for area, shape in START_PIPE_TEST:
             maze = Maze(area)
             self.assertEqual(maze.start_pipe_shape(), shape)
+
+
+class TestMaze3(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.maze = Maze(MAZE_3)
+
+    def testEnclosed(self):
+        self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_1)
 
 
 if __name__ == '__main__':

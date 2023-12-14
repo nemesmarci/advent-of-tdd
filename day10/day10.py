@@ -82,6 +82,9 @@ class Maze:
                 zoomed_in.add((3 * y + 1, 3 * x + 2))
         return zoomed_in
 
+    def enclosed_tiles(self) -> set[tuple[int, int]]:
+        return set()
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
