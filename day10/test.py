@@ -2,7 +2,7 @@ import unittest
 from day10 import Maze
 
 
-TEST_DATA_1 = [
+MAZE_1 = [
     ".....",
     ".S-7.",
     ".|.|.",
@@ -36,8 +36,8 @@ AREA = {
     (4, 0): '.', (4, 1): '.', (4, 2): '.', (4, 3): '.', (4, 4): '.',
 }
 
-LOOP = [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (2, 1)]
-DIRECTIONS = ['E', 'E', 'S', 'S', 'W', 'W', 'N', 'N']
+LOOP_1 = [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (2, 1)]
+DIRECTIONS_1 = ['E', 'E', 'S', 'S', 'W', 'W', 'N', 'N']
 START_PIPE_TEST = [
     (['.|.', '.S.', '.|.'], '|'),
     (['...', '-S-', '...'], '-'),
@@ -47,7 +47,7 @@ START_PIPE_TEST = [
     (['...', '-S.', '.|.'], '7')
 ]
 
-TEST_DATA_2 = [
+MAZE_2 = [
     '..F7.',
     '.FJ|.',
     'SJ.L7',
@@ -59,19 +59,19 @@ TEST_DATA_2 = [
 class TestMaze1(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.maze = Maze(TEST_DATA_1)
+        cls.maze = Maze(MAZE_1)
 
     def testParse(self):
         self.assertDictEqual(self.maze.area, AREA)
         self.assertEqual(self.maze.start, (1, 1))
 
     def testLoop(self):
-        self.assertSetEqual(self.maze.loop(), set(LOOP))
+        self.assertSetEqual(self.maze.loop(), set(LOOP_1))
 
     def testNextInLoop(self):
-        for i in range(0, len(LOOP) - 1):
-            self.assertEqual(self.maze.next_in_loop(LOOP[i], DIRECTIONS[i]),
-                             (LOOP[i + 1], DIRECTIONS[i + 1]))
+        for i in range(0, len(LOOP_1) - 1):
+            self.assertEqual(self.maze.next_in_loop(LOOP_1[i], DIRECTIONS_1[i]),
+                             (LOOP_1[i + 1], DIRECTIONS_1[i + 1]))
 
     def testPart1(self):
         self.assertEqual(self.maze.part_one(), 4)
@@ -84,10 +84,11 @@ class TestMaze1(unittest.TestCase):
 class TestMaze2(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.maze = Maze(TEST_DATA_2)
+        cls.maze = Maze(MAZE_2)
 
     def testPart1(self):
         self.assertEqual(self.maze.part_one(), 8)
+
 
 class TestUniqueMaze(unittest.TestCase):
     def testStartPipeShape(self):

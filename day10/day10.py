@@ -67,7 +67,20 @@ class Maze:
         return len(self.loop()) // 2
 
     def zoom(self) -> set[tuple[int, int]]:
-        return set()
+        zoomed_in = set()
+        loop = self.loop()
+        for y, x in loop:
+            c = self.area[(y, x)]
+            zoomed_in.add((3 * y + 1, 3 * x + 1))
+            if c in '|LJ':
+                zoomed_in.add((3 * y, 3 * x + 1))
+            if c in '|7F':
+                zoomed_in.add((3 * y + 2, 3 * x + 1))
+            if c in '-J7':
+                zoomed_in.add((3 * y + 1, 3 * x))
+            if c in '-LF':
+                zoomed_in.add((3 * y + 1, 3 * x + 2))
+        return zoomed_in
 
 
 if __name__ == '__main__':
