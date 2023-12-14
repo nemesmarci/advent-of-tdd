@@ -143,6 +143,9 @@ class Maze:
                 free_zoom |= self.fill(zoom, zoomed_in)
         return enclosed_tiles
 
+    def part_two(self) -> int:
+        return 0
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:

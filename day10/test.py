@@ -147,6 +147,9 @@ class TestMaze3(unittest.TestCase):
     def testEnclosed(self):
         self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_3)
 
+    def testPart2(self):
+        self.assertEqual(self.maze.part_two(), 4)
+
 
 class TestMaze4(unittest.TestCase):
     @classmethod
@@ -156,6 +159,9 @@ class TestMaze4(unittest.TestCase):
     def testEnclosed(self):
         self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_4)
 
+    def testPart2(self):
+        self.assertEqual(self.maze.part_two(), 4)
+
 
 class TestMaze5(unittest.TestCase):
     @classmethod
@@ -164,6 +170,9 @@ class TestMaze5(unittest.TestCase):
 
     def testEnclosed(self):
         self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_5)
+
+    def testPart2(self):
+        self.assertEqual(self.maze.part_two(), 8)
 
 
 if __name__ == '__main__':
