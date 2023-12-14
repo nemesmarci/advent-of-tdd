@@ -67,8 +67,36 @@ MAZE_3 = [
     '...........'
 ]
 
-ENCLOSED_1 = {(6, 2), (6, 3), (6, 7), (6, 8)}
+ENCLOSED_3 = {(6, 2), (6, 3), (6, 7), (6, 8)}
 
+MAZE_4 = [
+    '..........',
+    '.S------7.',
+    '.|F----7|.',
+    '.||....||.',
+    '.||....||.',
+    '.|L-7F-J|.',
+    '.|..||..|.',
+    '.L--JL--J.',
+    '..........'
+]
+
+ENCLOSED_4 = {(6, 2), (6, 3), (6, 6), (6, 7)}
+
+MAZE_5 = [
+    '.F----7F7F7F7F-7....',
+    '.|F--7||||||||FJ....',
+    '.||.FJ||||||||L7....',
+    'FJL7L7LJLJ||LJ.L-7..',
+    'L--J.L7...LJS7F-7L7.',
+    '....F-J..F7FJ|L7L7L7',
+    '....L7.F7||L7|.L7L7|',
+    '.....|FJLJ|FJ|F7|.LJ',
+    '....FJL-7.||.||||...',
+    '....L---J.LJ.LJLJ...'
+]
+
+ENCLOSED_5 = {(3, 14), (4, 7), (4, 8), (4, 9), (5, 7), (5, 8), (6, 6), (6, 14)}
 
 class TestMaze1(unittest.TestCase):
     @classmethod
@@ -117,7 +145,25 @@ class TestMaze3(unittest.TestCase):
         cls.maze = Maze(MAZE_3)
 
     def testEnclosed(self):
-        self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_1)
+        self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_3)
+
+
+class TestMaze4(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.maze = Maze(MAZE_4)
+
+    def testEnclosed(self):
+        self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_4)
+
+
+class TestMaze5(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.maze = Maze(MAZE_5)
+
+    def testEnclosed(self):
+        self.assertSetEqual(self.maze.enclosed_tiles(), ENCLOSED_5)
 
 
 if __name__ == '__main__':
