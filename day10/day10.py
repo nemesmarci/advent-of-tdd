@@ -25,6 +25,8 @@ class Maze:
             dirs = {'-': 'W', 'L': 'N', 'F': 'S'}
         return next_node, dirs[self.area[next_node]]
 
-
     def loop(self) -> set[tuple[int, int]]:
         return set()
+
+    def start_pipe_shape(self) -> str:
+        return '|'

@@ -20,6 +20,15 @@ AREA = {
 
 LOOP = [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (2, 1)]
 DIRECTIONS = ['E', 'E', 'S', 'S', 'W', 'W', 'N', 'N']
+START_PIPE_TEST = [
+    ({(0, -1): '.', (-1, 0): '|', (0, 1): '.', (1, 0): '|'}, '|'),
+    ({(0, -1): '-', (-1, 0): '.', (0, 1): '-', (1, 0): '.'}, '-'),
+    ({(0, -1): '.', (-1, 0): '|', (0, 1): '-', (1, 0): '.'}, 'L'),
+    ({(0, -1): '-', (-1, 0): '|', (0, 1): '.', (1, 0): '.'}, 'J'),
+    ({(0, -1): '.', (-1, 0): '.', (0, 1): '-', (1, 0): '|'}, 'F'),
+    ({(0, -1): '-', (-1, 0): '.', (0, 1): '.', (1, 0): '|'}, '7')
+]
+
 
 class TestMaze(unittest.TestCase):
     @classmethod
@@ -37,6 +46,13 @@ class TestMaze(unittest.TestCase):
         for i in range(0, len(LOOP) - 1):
             self.assertEqual(self.maze.next_in_loop(LOOP[i], DIRECTIONS[i]),
                              (LOOP[i + 1], DIRECTIONS[i + 1]))
+
+    def testStartPipeShape(self):
+        for area, shape in START_PIPE_TEST:
+            maze = Maze([''])
+            maze.start = (0, 0)
+            maze.area = area
+            self.assertEqual(maze.start_pipe_shape(), shape)
 
 
 if __name__ == '__main__':
