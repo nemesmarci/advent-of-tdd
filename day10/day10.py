@@ -66,6 +66,9 @@ class Maze:
     def part_one(self) -> int:
         return len(self.loop()) // 2
 
+    def zoom(self) -> set[tuple[int, int]]:
+        return set()
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
