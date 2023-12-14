@@ -1,4 +1,5 @@
 from typing import Iterable
+from itertools import combinations
 
 
 class Image:
@@ -22,4 +23,21 @@ class Image:
                       if all(self.area[(y, x)] == '.' for y in range(self.max_y))}
 
     def part_one(self) -> int:
-        return 0
+        total_distance = 0
+        offset = 1
+        empty_rows = self.empty_rows()
+        empty_cols = self.empty_cols()
+        for (y1, x1), (y2, x2) in combinations(self.galaxies, 2):
+            if y2 < y1:
+                y1, y2 = y2, y1
+            if x2 < x1:
+                x1, x2 = x2, x1
+            total_distance += y2 - y1
+            for row in empty_rows:
+                if row in range(y1 + 1, y2 + 1):
+                    total_distance += offset
+            total_distance += x2 - x1
+            for col in empty_cols:
+                if col in range(x1 + 1, x2 + 1):
+                    total_distance += offset
+        return total_distance
