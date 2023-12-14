@@ -13,5 +13,11 @@ class Image:
         self.max_y: int = y + 1
         self.max_x: int = x + 1
 
+    def empty_rows(self) -> set[int]:
+        return set()
+
+    def empty_cols(self) -> set[int]:
+        return set()
+
     def part_one(self) -> int:
         return 0

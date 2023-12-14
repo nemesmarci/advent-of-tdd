@@ -31,6 +31,12 @@ class TestGalaxy(unittest.TestCase):
             for x in range(len(IMAGE[y])):
                 self.assertEqual(IMAGE[y][x], self.image.area[(y, x)])
 
+    def testEmptyRow(self):
+        self.assertSetEqual(self.image.empty_rows(), {3, 7})
+
+    def testEmptyCol(self):
+        self.assertSetEqual(self.image.empty_cols(), {2, 5, 8})
+
     def testPart1(self):
         self.assertEqual(self.image.part_one(), 374)
 
