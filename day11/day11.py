@@ -41,3 +41,6 @@ class Image:
                 if col in range(x1 + 1, x2 + 1):
                     total_distance += offset
         return total_distance
+
+    def part_two(self) -> int:
+        return 0

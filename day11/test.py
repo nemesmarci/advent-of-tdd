@@ -40,6 +40,9 @@ class TestGalaxy(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.image.part_one(), 374)
 
+    def testPart2(self):
+        self.assertEqual(self.image.part_two(), 8410)
+
 
 if __name__ == '__main__':
     unittest.main()
