@@ -98,6 +98,7 @@ MAZE_5 = [
 
 ENCLOSED_5 = {(3, 14), (4, 7), (4, 8), (4, 9), (5, 7), (5, 8), (6, 6), (6, 14)}
 
+
 class TestMaze1(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

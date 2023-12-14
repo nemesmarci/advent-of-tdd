@@ -144,10 +144,11 @@ class Maze:
         return enclosed_tiles
 
     def part_two(self) -> int:
-        return 0
+        return len(self.enclosed_tiles())
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         maze = Maze(data)
         print(maze.part_one())
+        print(maze.part_two())
