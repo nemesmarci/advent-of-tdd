@@ -38,7 +38,7 @@ TEST_DATA_2 = [
 ]
 
 
-class TestMaze(unittest.TestCase):
+class TestMaze1(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.maze = Maze(TEST_DATA_1)
@@ -55,15 +55,23 @@ class TestMaze(unittest.TestCase):
             self.assertEqual(self.maze.next_in_loop(LOOP[i], DIRECTIONS[i]),
                              (LOOP[i + 1], DIRECTIONS[i + 1]))
 
+    def testPart1(self):
+        self.assertEqual(self.maze.part_one(), 4)
+
+
+class TestMaze2(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.maze = Maze(TEST_DATA_2)
+
+    def testPart1(self):
+        self.assertEqual(self.maze.part_one(), 8)
+
+class TestUniqueMaze(unittest.TestCase):
     def testStartPipeShape(self):
         for area, shape in START_PIPE_TEST:
             maze = Maze(area)
             self.assertEqual(maze.start_pipe_shape(), shape)
-
-    def testPart1(self):
-        self.assertEqual(self.maze.part_one(), 4)
-        maze = Maze(TEST_DATA_2)
-        self.assertEqual(maze.part_one(), 8)
 
 
 if __name__ == '__main__':
