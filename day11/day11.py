@@ -22,9 +22,8 @@ class Image:
         return {x for x in range(self.max_x)
                       if all(self.area[(y, x)] == '.' for y in range(self.max_y))}
 
-    def part_one(self) -> int:
+    def solve(self, offset: int) -> int:
         total_distance = 0
-        offset = 1
         empty_rows = self.empty_rows()
         empty_cols = self.empty_cols()
         for (y1, x1), (y2, x2) in combinations(self.galaxies, 2):
@@ -42,5 +41,15 @@ class Image:
                     total_distance += offset
         return total_distance
 
+    def part_one(self) -> int:
+        return self.solve(1)
+
     def part_two(self) -> int:
-        return 0
+        return self.solve(1000000 - 1)
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        image = Image(data)
+        print(image.part_one())
+        print(image.part_two())

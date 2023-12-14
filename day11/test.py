@@ -41,7 +41,8 @@ class TestGalaxy(unittest.TestCase):
         self.assertEqual(self.image.part_one(), 374)
 
     def testPart2(self):
-        self.assertEqual(self.image.part_two(), 8410)
+        self.assertEqual(self.image.solve(10 - 1), 1030)
+        self.assertEqual(self.image.solve(100 - 1), 8410)
 
 
 if __name__ == '__main__':
