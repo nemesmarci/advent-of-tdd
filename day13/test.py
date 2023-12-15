@@ -49,12 +49,10 @@ class TestMirrors(unittest.TestCase):
         self.assertListEqual(self.mirrors.patterns, PATTERNS)
 
     def testFindMirror(self):
-        for pattern, mirrors in zip(PATTERNS, MIRRORS):
-            self.assertTupleEqual(self.mirrors.find_mirror(pattern), mirrors)
-
-    def testFindVerticalMirror(self):
         self.assertEqual(self.mirrors.find_vertical_mirror(PATTERNS[0]), 5)
         self.assertEqual(self.mirrors.find_horizontal_mirror(PATTERNS[1]), 4)
+        for pattern, mirrors in zip(PATTERNS, MIRRORS):
+            self.assertTupleEqual(self.mirrors.find_mirror(pattern), mirrors)
 
 
 if __name__ == '__main__':
