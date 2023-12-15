@@ -40,3 +40,6 @@ class Springs:
             return sol[(i, j)]
 
         return solve(len(row), len(description))
+
+    def part_one(self) -> int:
+        return 0

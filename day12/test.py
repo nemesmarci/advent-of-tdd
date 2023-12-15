@@ -35,6 +35,9 @@ class TestSprings(unittest.TestCase):
             self.assertEqual(self.springs.possible_solutions(row, description),
                              solutions)
 
+    def testPart1(self):
+        self.assertEqual(self.springs.part_one(), 21)
+
 
 if __name__ == '__main__':
     unittest.main()
