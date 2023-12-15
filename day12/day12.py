@@ -46,10 +46,12 @@ class Springs:
                    for row, description in zip(self.rows, self.descriptions))
 
     def part_two(self) -> int:
-        return 0
+        return sum(self.possible_solutions('?'.join([row] * 5), description * 5)
+                   for row, description in zip(self.rows, self.descriptions))
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         springs = Springs(data)
     print(springs.part_one())
+    print(springs.part_two())
