@@ -41,9 +41,12 @@ class Springs:
 
         return solve(len(row), len(description))
 
-    def part_one(self):
+    def part_one(self) -> int:
         return sum(self.possible_solutions(row, description)
                    for row, description in zip(self.rows, self.descriptions))
+
+    def part_two(self) -> int:
+        return 0
 
 
 if __name__ == '__main__':

@@ -38,6 +38,9 @@ class TestSprings(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.springs.part_one(), 21)
 
+    def testPart2(self):
+        self.assertEqual(self.springs.part_two(), 525152)
+
 
 if __name__ == '__main__':
     unittest.main()
