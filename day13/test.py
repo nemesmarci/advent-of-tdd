@@ -37,6 +37,8 @@ PATTERNS = [
      '#....#..#']
 ]
 
+MIRRORS = [(5, None), (None, 4)]
+
 
 class TestMirrors(unittest.TestCase):
     @classmethod
@@ -45,6 +47,10 @@ class TestMirrors(unittest.TestCase):
 
     def testParse(self):
         self.assertListEqual(self.mirrors.patterns, PATTERNS)
+
+    def testFindMirror(self):
+        for pattern, mirrors in zip(PATTERNS, MIRRORS):
+            self.assertTupleEqual(self.mirrors.find_mirror(pattern), mirrors)
 
 
 if __name__ == '__main__':
