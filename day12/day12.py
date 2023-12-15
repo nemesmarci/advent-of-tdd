@@ -1,4 +1,5 @@
 from typing import Iterable
+from collections import defaultdict
 
 
 class Springs:
@@ -12,4 +13,30 @@ class Springs:
 
     @staticmethod
     def possible_solutions(row: str, description: list[int]) -> int:
-        return 0
+        """https://www.sciencedirect.com/science/article/pii/S0166218X14000080#s000025"""
+        sol = defaultdict(lambda: -1)
+
+        def can_place_block(i, j):
+            for m in range(i, i - description[j - 1], -1):
+                if row[m - 1] == '.':
+                    return False
+            if (j > 1) and row[i - description[j - 1] - 1] == '#':
+                return False
+            return True
+
+        def solve(i, j):
+            if i < 0 or j < 0:
+                return 0
+            elif i == j == 0:
+                return 1
+            if sol[(i, j)] != -1:
+                return sol[(i, j)]
+            else:
+                sol[(i, j)] = 0
+                if solve(i - 1, j) > 0 and row[i - 1] != '#':
+                    sol[(i, j)] = sol[(i, j)] + solve(i - 1, j)
+                if solve(i - description[j - 1] - (j > 1), j - 1) > 0 and can_place_block(i, j):
+                    sol[(i, j)] = sol[(i, j)] + solve(i - description[j - 1] - (j > 1), j - 1)
+            return sol[(i, j)]
+
+        return solve(len(row), len(description))
