@@ -23,3 +23,6 @@ class Rocks:
             new_col = self.move_blocks(col)
             for y in range(self.y):
                 self.area[y][x] = new_col[y]
+
+    def weight(self) -> int:
+        return 0

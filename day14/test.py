@@ -72,6 +72,10 @@ class TestRocks(unittest.TestCase):
         self.rocks.move_cols()
         self.assertListEqual(self.rocks.area, MOVED_AREA)
 
+    def testWeigh(self):
+        self.rocks.move_cols()
+        self.assertEqual(self.rocks.weight(), 136)
+
 
 if __name__ == '__main__':
     unittest.main()
