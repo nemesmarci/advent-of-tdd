@@ -35,6 +35,9 @@ class TestGrid(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.grid.part_one(), 46)
 
+    def testPart2(self):
+        self.assertEqual(self.grid.part_two(), 51)
+
 
 if __name__ == '__main__':
     unittest.main()
