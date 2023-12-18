@@ -62,12 +62,14 @@ class TestMirrors(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.mirrors.part_one(), 405)
 
-
     def testFindMirrorWithSmudge(self):
         self.assertEqual(self.mirrors.find_smudged_horizontal_mirror(PATTERNS[0]), 3)
         self.assertEqual(self.mirrors.find_smudged_horizontal_mirror(PATTERNS[1]), 1)
         for pattern, mirrors in zip(PATTERNS, SMUDGED_MIRRORS):
             self.assertTupleEqual(self.mirrors.find_smudged_mirror(pattern), mirrors)
+
+    def testPart2(self):
+        self.assertEqual(self.mirrors.part_two(), 400)
 
 
 if __name__ == '__main__':

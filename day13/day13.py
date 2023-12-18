@@ -71,6 +71,9 @@ class Mirrors:
     def find_smudged_mirror(pattern: list[str]) -> tuple[Optional[int], Optional[int]]:
         return Mirrors.find_smudged_vertical_mirror(pattern), Mirrors.find_smudged_horizontal_mirror(pattern)
 
+    def part_two(self) -> int:
+        return 0
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
