@@ -3,7 +3,7 @@ from typing import Iterable, Optional
 
 class Mirrors:
     def __init__(self, data: Iterable[str]) -> None:
-        lines = '\n'.join(data)
+        lines = ''.join(data)
         blocks = ''.join(lines).split('\n\n')
         self.patterns: list[list[str]] = [[line for line in block.split('\n') if line] for block in blocks]
 
@@ -33,4 +33,10 @@ class Mirrors:
         return vertical_mirror if vertical_mirror else 100 * horizontal_mirror
 
     def part_one(self) -> int:
-        return 0
+        return sum(self.value(pattern) for pattern in self.patterns)
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        mirrors = Mirrors(''.join(data.readlines()))
+        print(mirrors.part_one())
