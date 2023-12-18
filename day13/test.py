@@ -38,6 +38,7 @@ PATTERNS = [
 ]
 
 MIRRORS = [(5, None), (None, 4)]
+SMUDGED_MIRRORS = [(None, 3), (None, 1)]
 
 
 class TestMirrors(unittest.TestCase):
@@ -60,6 +61,13 @@ class TestMirrors(unittest.TestCase):
 
     def testPart1(self):
         self.assertEqual(self.mirrors.part_one(), 405)
+
+
+    def testFindMirrorWithSmudge(self):
+        self.assertEqual(self.mirrors.find_smudged_horizontal_mirror(PATTERNS[0]), 3)
+        self.assertEqual(self.mirrors.find_smudged_horizontal_mirror(PATTERNS[1]), 1)
+        for pattern, mirrors in zip(PATTERNS, SMUDGED_MIRRORS):
+            self.assertTupleEqual(self.mirrors.find_smudged_mirror(pattern), mirrors)
 
 
 if __name__ == '__main__':

@@ -35,6 +35,17 @@ class Mirrors:
     def part_one(self) -> int:
         return sum(self.value(pattern) for pattern in self.patterns)
 
+    @staticmethod
+    def find_smudged_vertical_mirror(pattern: list[str]) -> Optional[int]:
+        return None
+
+    @staticmethod
+    def find_smudged_horizontal_mirror(pattern: list[str]) -> Optional[int]:
+        return None
+
+    @staticmethod
+    def find_smudged_mirror(pattern: list[str]) -> tuple[Optional[int], Optional[int]]:
+        return None, None
 
 if __name__ == '__main__':
     with open('input.txt') as data:
