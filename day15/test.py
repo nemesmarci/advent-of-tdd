@@ -21,6 +21,9 @@ class TestBoxes(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.boxes.part_one(), 1320)
 
+    def testPart2(self) -> int:
+        self.assertEqual(self.boxes.part_two(), 145)
+
 
 if __name__ == '__main__':
     unittest.main()
