@@ -26,3 +26,7 @@ class Mirrors:
     @staticmethod
     def find_mirror(pattern: list[str]) -> tuple[Optional[int], Optional[int]]:
         return Mirrors.find_vertical_mirror(pattern), Mirrors.find_horizontal_mirror(pattern)
+
+    @staticmethod
+    def value(pattern: list[str]) -> int:
+        return 0

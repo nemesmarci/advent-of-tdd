@@ -54,6 +54,10 @@ class TestMirrors(unittest.TestCase):
         for pattern, mirrors in zip(PATTERNS, MIRRORS):
             self.assertTupleEqual(self.mirrors.find_mirror(pattern), mirrors)
 
+    def testValue(self):
+        self.assertEqual(self.mirrors.value(PATTERNS[0]), 5)
+        self.assertEqual(self.mirrors.value(PATTERNS[1]), 400)
+
 
 if __name__ == '__main__':
     unittest.main()
