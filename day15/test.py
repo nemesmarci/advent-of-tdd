@@ -18,6 +18,9 @@ class TestBoxes(unittest.TestCase):
         for string, value in zip(STRINGS, HASHES):
             self.assertEqual(self.boxes.hash(string), value)
 
+    def testPart1(self):
+        self.assertEqual(self.boxes.part_one(), 1320)
+
 
 if __name__ == '__main__':
     unittest.main()

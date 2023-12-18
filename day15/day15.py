@@ -10,3 +10,6 @@ class Boxes:
             value *= 17
             value %= 256
         return value
+
+    def part_one(self) -> int:
+        return 0
