@@ -51,10 +51,18 @@ class Grid:
         return self.energized([(starting_tile, starting_direction)])
 
     def part_two(self) -> int:
-        return 0
+        ranges = {'R': (range(self.y + 1), [0]),
+                  'L': (range(self.y + 1), [self.x]),
+                  'D': ([0], range(self.x + 1)),
+                  'U': ([self.y], range(self.x + 1))}
+        return max(self.energized([((y, x), d) for d in self.rules[direction][self.area[(y, x)]]])
+                   for direction in self.rules
+                   for y in ranges[direction][0]
+                   for x in ranges[direction][1])
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         grid = Grid(data)
         print(grid.part_one())
+        print(grid.part_two())
