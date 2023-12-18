@@ -58,6 +58,9 @@ class TestMirrors(unittest.TestCase):
         self.assertEqual(self.mirrors.value(PATTERNS[0]), 5)
         self.assertEqual(self.mirrors.value(PATTERNS[1]), 400)
 
+    def testPart1(self):
+        self.assertEqual(self.mirrors.part_one(), 405)
+
 
 if __name__ == '__main__':
     unittest.main()
