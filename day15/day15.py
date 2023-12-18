@@ -4,4 +4,9 @@ class Boxes:
 
     @staticmethod
     def hash(string) -> int:
-        return 0
+        value = 0
+        for c in string:
+            value += ord(c)
+            value *= 17
+            value %= 256
+        return value
