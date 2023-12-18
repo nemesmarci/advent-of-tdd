@@ -12,4 +12,10 @@ class Boxes:
         return value
 
     def part_one(self) -> int:
-        return 0
+        return sum(self.hash(string) for string in self.strings)
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        boxes = Boxes(data.readline())
+        print(boxes.part_one())
