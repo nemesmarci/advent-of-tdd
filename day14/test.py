@@ -55,12 +55,13 @@ MOVED_AREA = [
 
 
 class TestRocks(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.rocks = Rocks(TEST_DATA)
+    def setUp(self):
+        self.rocks = Rocks(TEST_DATA)
 
     def testParse(self):
         self.assertListEqual(self.rocks.area, AREA)
+        self.assertEqual(self.rocks.y, 10)
+        self.assertEqual(self.rocks.x, 10)
 
     def testMoveBlocks(self):
         for x in range(len(AREA[0])):
