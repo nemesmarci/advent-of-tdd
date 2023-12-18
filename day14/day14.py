@@ -1,4 +1,5 @@
 from typing import Iterable
+from collections import Counter
 
 
 class Rocks:
@@ -7,4 +8,9 @@ class Rocks:
 
     @staticmethod
     def move_blocks(line: str) -> str:
-        return ''
+        blocks = line.split('#')
+        new_blocks = []
+        for block in blocks:
+            items = Counter(block)
+            new_blocks.append('O' * items['O'] + '.' * items['.'])
+        return '#'.join(new_blocks)
