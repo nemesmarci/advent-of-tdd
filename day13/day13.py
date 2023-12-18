@@ -29,4 +29,5 @@ class Mirrors:
 
     @staticmethod
     def value(pattern: list[str]) -> int:
-        return 0
+        vertical_mirror, horizontal_mirror = Mirrors.find_mirror(pattern)
+        return vertical_mirror if vertical_mirror else 100 * horizontal_mirror
