@@ -14,3 +14,6 @@ class Rocks:
             items = Counter(block)
             new_blocks.append('O' * items['O'] + '.' * items['.'])
         return '#'.join(new_blocks)
+
+    def move_cols(self) -> None:
+        ...
