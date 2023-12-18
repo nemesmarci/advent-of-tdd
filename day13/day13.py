@@ -7,14 +7,13 @@ class Mirrors:
         blocks = ''.join(lines).split('\n\n')
         self.patterns: list[list[str]] = [[line for line in block.split('\n') if line] for block in blocks]
 
-
     @staticmethod
     def get_left(col, pattern):
-        return ([pattern[y][x] for y in range(len(pattern))] for x in range(col - 1, 0 - 1, -1))
+        return ([pattern[y][x] for y in range(len(pattern))] for x in range(col - 1, - 1, -1))
 
     @staticmethod
     def get_right(col, pattern):
-       return ([pattern[y][x] for y in range(len(pattern))] for x in range(col, len(pattern[0])))
+        return ([pattern[y][x] for y in range(len(pattern))] for x in range(col, len(pattern[0])))
 
     @staticmethod
     def find_vertical_mirror(pattern: list[str]) -> Optional[int]:
@@ -59,23 +58,28 @@ class Mirrors:
 
     @staticmethod
     def find_smudged_horizontal_mirror(pattern: list[str]) -> Optional[int]:
-        old_horizontal_mirror = Mirrors.find_vertical_mirror(pattern)
+        old_horizontal_mirror = Mirrors.find_horizontal_mirror(pattern)
         for row in range(1, len(pattern)):
             if old_horizontal_mirror is None or row != old_horizontal_mirror:
                 if sum(u[i] != d[i] for u, d in zip(Mirrors.get_up(row, pattern), Mirrors.get_down(row, pattern))
                        for i in range(len(u))) <= 1:
                     return row
 
-
     @staticmethod
     def find_smudged_mirror(pattern: list[str]) -> tuple[Optional[int], Optional[int]]:
         return Mirrors.find_smudged_vertical_mirror(pattern), Mirrors.find_smudged_horizontal_mirror(pattern)
 
+    @staticmethod
+    def smudged_value(pattern: list[str]) -> int:
+        vertical_mirror, horizontal_mirror = Mirrors.find_smudged_mirror(pattern)
+        return vertical_mirror if vertical_mirror else 100 * horizontal_mirror
+
     def part_two(self) -> int:
-        return 0
+        return sum(self.smudged_value(pattern) for pattern in self.patterns)
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         mirrors = Mirrors(''.join(data.readlines()))
         print(mirrors.part_one())
+        print(mirrors.part_two())
