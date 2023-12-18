@@ -66,19 +66,18 @@ class TestRocks(unittest.TestCase):
     def testMoveBlocks(self):
         for x in range(len(AREA[0])):
             col = [AREA[y][x] for y in range(len(AREA))]
-            self.assertEqual(self.rocks.move_blocks(''.join(col)), MOVED_COLS[x])
+            self.assertEqual(self.rocks.move_blocks(''.join(col), 'up'), MOVED_COLS[x])
 
     def testMoveCols(self):
-        self.rocks.move_cols()
+        self.rocks.move_cols('up')
         self.assertListEqual(self.rocks.area, MOVED_AREA)
 
     def testWeigh(self):
-        self.rocks.move_cols()
+        self.rocks.move_cols('up')
         self.assertEqual(self.rocks.weight(), 136)
 
     def testCycle(self):
-        self.rocks.cycle()
-        self.assertEqual(self.rocks.weight(), 64)
+        self.assertEqual(self.rocks.run_cycle(), 64)
 
 
 if __name__ == '__main__':
