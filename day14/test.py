@@ -76,6 +76,10 @@ class TestRocks(unittest.TestCase):
         self.rocks.move_cols()
         self.assertEqual(self.rocks.weight(), 136)
 
+    def testCycle(self):
+        self.rocks.cycle()
+        self.assertEqual(self.rocks.weight(), 64)
+
 
 if __name__ == '__main__':
     unittest.main()

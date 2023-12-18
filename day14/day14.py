@@ -33,6 +33,9 @@ class Rocks:
                     w += y
         return w
 
+    def cycle(self) -> int:
+        ...
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
