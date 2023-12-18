@@ -27,6 +27,19 @@ AREA = [
     ['#', 'O', 'O', '.', '.', '#', '.', '.', '.', '.']
 ]
 
+MOVED_COLS = [
+    'OOOO....##',
+    'OOO.......',
+    'O....#OO..',
+    'O..#......',
+    '.#O.......',
+    '#.#O..#.##',
+    '..#O....#.',
+    'O....#O.#.',
+    '....#.....',
+    '.#O..#O...'
+]
+
 
 class TestRocks(unittest.TestCase):
     @classmethod
@@ -35,6 +48,11 @@ class TestRocks(unittest.TestCase):
 
     def testParse(self):
         self.assertListEqual(self.rocks.area, AREA)
+
+    def testMoveBlocks(self):
+        for x in range(len(AREA[0])):
+            col = [AREA[y][x] for y in range(len(AREA))]
+            self.assertEqual(self.rocks.move_blocks(''.join(col)), MOVED_COLS[x])
 
 
 if __name__ == '__main__':
