@@ -25,4 +25,18 @@ class Rocks:
                 self.area[y][x] = new_col[y]
 
     def weight(self) -> int:
-        return 0
+        w = 0
+        for x in range(self.x):
+            col = [self.area[y][x] for y in range(self.y)]
+            for y in range(self.y, 0, -1):
+                if col[self.y - y] == 'O':
+                    w += y
+        return w
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        start = data.readlines()
+    rocks = Rocks(start)
+    rocks.move_cols()
+    print(rocks.weight())
