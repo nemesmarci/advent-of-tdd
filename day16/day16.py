@@ -9,3 +9,6 @@ class Grid:
                 self.area[(y, x)] = c
         self.x: int = y
         self.y: int = x
+
+    def part_one(self) -> int:
+        return 0
