@@ -18,6 +18,17 @@ TEST_DATA = [
     '4322674655533'
 ]
 
+STEPS = [
+    (0, 0, 'N', 1, {(-1, 0, 'N', 2), (0, -1, 'W', 1), (0, 1, 'E', 1)}),
+    (0, 0, 'E', 1, {(0, 1, 'E', 2), (-1, 0, 'N', 1), (1, 0, 'S', 1)}),
+    (0, 0, 'S', 1, {(1, 0, 'S', 2), (0, 1, 'E', 1), (0, -1, 'W', 1)}),
+    (0, 0, 'W', 1, {(0, -1, 'W', 2), (-1, 0, 'N', 1), (1, 0, 'S', 1)}),
+    (0, 0, 'N', 3, {(0, -1, 'W', 1), (0, 1, 'E', 1)}),
+    (0, 0, 'E', 3, {(-1, 0, 'N', 1), (1, 0, 'S', 1)}),
+    (0, 0, 'S', 3, {(0, 1, 'E', 1), (0, -1, 'W', 1)}),
+    (0, 0, 'W', 3, {(-1, 0, 'N', 1), (1, 0, 'S', 1)}),
+]
+
 
 class TestBlocks(unittest.TestCase):
     @classmethod
@@ -33,6 +44,10 @@ class TestBlocks(unittest.TestCase):
 
     def testPath(self):
         self.assertEqual(self.blocks.shortest_path(), 102)
+
+    def testPossibleSteps(self):
+        for y, x, direction, straight, expected in STEPS:
+            self.assertSetEqual(self.blocks.possible_steps(y, x, direction, straight), expected)
 
 
 if __name__ == '__main__':

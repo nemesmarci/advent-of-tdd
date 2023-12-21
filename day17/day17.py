@@ -10,5 +10,8 @@ class Blocks:
         self.y: int = y
         self.x: int = x
 
+    def possible_steps(self, y: int, x: int, direction: str, straight: int) -> set[tuple[int, int, str, int]]:
+        return set()
+
     def shortest_path(self) -> int:
         return 0
