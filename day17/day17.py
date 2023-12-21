@@ -12,7 +12,9 @@ class Blocks:
         self.y: int = y
         self.x: int = x
 
-    def possible_steps(self, y: int, x: int, direction: str, straight: int) -> set[tuple[int, int, str, int]]:
+    @staticmethod
+    def possible_steps(y: int, x: int, direction: str, straight: int,
+                       min_straight: int, max_straight: int) -> set[tuple[int, int, str, int]]:
         possible = set()
         if straight < 3:
             match direction:
@@ -32,7 +34,7 @@ class Blocks:
             possible.add((y, x + 1, 'E', 1))
         return possible
 
-    def shortest_path(self) -> int:
+    def shortest_path(self, min_straight, max_straight) -> int:
         distances = dict()
         distances[(0, 1, 'E', 1)] = self.area[(0, 1)]
         distances[(1, 0, 'S', 1)] = self.area[(1, 0)]
@@ -43,7 +45,8 @@ class Blocks:
             distance, y, x, direction, straight = heappop(heap)
             if (y, x) == (self.y, self.x):
                 return distance
-            for next_y, next_x, next_dir, next_straight in self.possible_steps(y, x, direction, straight):
+            for next_y, next_x, next_dir, next_straight in self.possible_steps(y, x, direction, straight,
+                                                                               min_straight, max_straight):
                 if (next_y, next_x) not in self.area:
                     continue
                 next_d = distance + self.area[(next_y, next_x)]
@@ -55,4 +58,4 @@ class Blocks:
 if __name__ == '__main__':
     with open('input.txt') as data:
         blocks = Blocks(data)
-    print(blocks.shortest_path())
+    print(blocks.shortest_path(0, 3))

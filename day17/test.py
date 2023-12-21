@@ -30,6 +30,15 @@ STEPS = [
 ]
 
 
+TEST_DATA_2 = [
+    '111111111111',
+    '999999999991',
+    '999999999991',
+    '999999999991',
+    '999999999991'
+]
+
+
 class TestBlocks(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -43,11 +52,13 @@ class TestBlocks(unittest.TestCase):
         self.assertEqual(self.blocks.x, len(TEST_DATA[0]) - 1)
 
     def testPath(self):
-        self.assertEqual(self.blocks.shortest_path(), 102)
+        self.assertEqual(self.blocks.shortest_path(0, 3), 102)
+        self.assertEqual(self.blocks.shortest_path(4, 10), 94)
+        self.assertEqual(Blocks(TEST_DATA_2).shortest_path(4, 10), 71)
 
     def testPossibleSteps(self):
         for y, x, direction, straight, expected in STEPS:
-            self.assertSetEqual(self.blocks.possible_steps(y, x, direction, straight), expected)
+            self.assertSetEqual(self.blocks.possible_steps(y, x, direction, straight, 0, 3), expected)
 
 
 if __name__ == '__main__':
