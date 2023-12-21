@@ -27,9 +27,9 @@ class TestBlocks(unittest.TestCase):
     def testParse(self):
         for y, line in enumerate(TEST_DATA):
             for x, c in enumerate(line.strip()):
-                self.assertEqual(self.blocks.area[(y, x)], c)
-        self.assertEqual(self.blocks.y, len(TEST_DATA))
-        self.assertEqual(self.blocks.x, len(TEST_DATA[0]))
+                self.assertEqual(self.blocks.area[(y, x)], int(c))
+        self.assertEqual(self.blocks.y, len(TEST_DATA) - 1)
+        self.assertEqual(self.blocks.x, len(TEST_DATA[0]) - 1)
 
 
 if __name__ == '__main__':
