@@ -31,6 +31,9 @@ class TestBlocks(unittest.TestCase):
         self.assertEqual(self.blocks.y, len(TEST_DATA) - 1)
         self.assertEqual(self.blocks.x, len(TEST_DATA[0]) - 1)
 
+    def testPath(self):
+        self.assertEqual(self.blocks.shortest_path(), 102)
+
 
 if __name__ == '__main__':
     unittest.main()
