@@ -1,4 +1,6 @@
 from typing import Iterable
+from heapq import heappush, heappop
+from math import inf
 
 
 class Blocks:
@@ -31,4 +33,26 @@ class Blocks:
         return possible
 
     def shortest_path(self) -> int:
-        return 0
+        distances = dict()
+        distances[(0, 1, 'E', 1)] = self.area[(0, 1)]
+        distances[(1, 0, 'S', 1)] = self.area[(1, 0)]
+        heap = []
+        heappush(heap, (self.area[0, 1], 0, 1, 'E', 1))
+        heappush(heap, (self.area[1, 0], 1, 0, 'S', 1))
+        while heap:
+            distance, y, x, direction, straight = heappop(heap)
+            if (y, x) == (self.y, self.x):
+                return distance
+            for next_y, next_x, next_dir, next_straight in self.possible_steps(y, x, direction, straight):
+                if (next_y, next_x) not in self.area:
+                    continue
+                next_d = distance + self.area[(next_y, next_x)]
+                if distances.get((next_y, next_x, next_dir, next_straight), inf) > next_d:
+                    distances[(next_y, next_x, next_dir, next_straight)] = next_d
+                    heappush(heap, (next_d, next_y, next_x, next_dir, next_straight))
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        blocks = Blocks(data)
+    print(blocks.shortest_path())
