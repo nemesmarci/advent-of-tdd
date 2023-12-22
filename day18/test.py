@@ -28,6 +28,9 @@ class TestLagoon(unittest.TestCase):
         self.assertListEqual(self.lagoon.directions, list('RDLDRDLULURULU'))
         self.assertListEqual(self.lagoon.lengths, [6, 5, 2, 2, 2, 2, 5, 2, 1, 2, 2, 3, 2, 2])
 
+    def testPerimeter(self):
+        self.assertEqual(self.lagoon.perimeter(), 38)
+
 
 if __name__ == '__main__':
     unittest.main()

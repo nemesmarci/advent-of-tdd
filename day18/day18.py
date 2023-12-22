@@ -9,3 +9,6 @@ class Lagoon:
             direction, length = line.strip().split()[:2]
             self.directions.append(direction)
             self.lengths.append(int(length))
+
+    def perimeter(self) -> int:
+        return 0
