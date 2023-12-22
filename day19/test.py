@@ -56,6 +56,9 @@ class TestSorter(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.sorter.part_one(), 19114)
 
+    def testPart2(self):
+        self.assertEqual(self.sorter.part_two(), 167409079868000)
+
 
 if __name__ == '__main__':
     unittest.main()
