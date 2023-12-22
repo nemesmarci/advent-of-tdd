@@ -12,3 +12,6 @@ class Lagoon:
 
     def perimeter(self) -> int:
         return sum(self.lengths)
+
+    def area(self) -> int:
+        return 0

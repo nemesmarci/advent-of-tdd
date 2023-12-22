@@ -31,6 +31,9 @@ class TestLagoon(unittest.TestCase):
     def testPerimeter(self):
         self.assertEqual(self.lagoon.perimeter(), 38)
 
+    def testArea(self):
+        self.assertEqual(self.lagoon.area(), 62)
+
 
 if __name__ == '__main__':
     unittest.main()
