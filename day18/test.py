@@ -22,7 +22,7 @@ TEST_DATA = [
 class TestLagoon(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.lagoon = Lagoon(TEST_DATA)
+        cls.lagoon = Lagoon(TEST_DATA, False)
 
     def testParse(self):
         self.assertListEqual(self.lagoon.directions, list('RDLDRDLULURULU'))
@@ -33,6 +33,9 @@ class TestLagoon(unittest.TestCase):
 
     def testArea(self):
         self.assertEqual(self.lagoon.area(), 62)
+
+    def testPart2(self):
+        self.assertEqual(Lagoon(TEST_DATA, True).area(), 952408144115)
 
 
 if __name__ == '__main__':

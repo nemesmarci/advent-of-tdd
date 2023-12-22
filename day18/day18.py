@@ -3,7 +3,7 @@ from shapely import Polygon
 
 
 class Lagoon:
-    def __init__(self, data: Iterable[str]) -> None:
+    def __init__(self, data: Iterable[str], swap: bool) -> None:
         self.directions: list[str] = []
         self.lengths: list[int] = []
         for line in data:
@@ -33,5 +33,5 @@ class Lagoon:
 
 if __name__ == '__main__':
     with open('input.txt') as data:
-        lagoon = Lagoon(data)
+        lagoon = Lagoon(data, False)
     print(lagoon.area())
