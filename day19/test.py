@@ -53,6 +53,9 @@ class TestSorter(unittest.TestCase):
         self.assertDictEqual(self.sorter.workflows, WORKFLOWS)
         self.assertListEqual(self.sorter.parts, PARTS)
 
+    def testPart1(self):
+        self.assertEqual(self.sorter.part_one(), 19114)
+
 
 if __name__ == '__main__':
     unittest.main()

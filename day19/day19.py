@@ -12,3 +12,6 @@ class Sorter:
         x, m, a, s = 'x', 'm', 'a', 's'
         for part in raw_parts[:-1].split('\n'):
             self.parts.append(eval(part.replace('=', ':')))
+
+    def part_one(self) -> int:
+        return 0
