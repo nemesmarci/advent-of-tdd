@@ -1,4 +1,5 @@
 from typing import Iterable
+from shapely import Polygon
 
 
 class Lagoon:
@@ -14,4 +15,23 @@ class Lagoon:
         return sum(self.lengths)
 
     def area(self) -> int:
-        return 0
+        corners = []
+        y, x = 0, 0
+        for direction, length in zip(self.directions, self.lengths):
+            match direction:
+                case 'U':
+                    y -= length
+                case 'D':
+                    y += length
+                case 'L':
+                    x -= length
+                case 'R':
+                    x += length
+            corners.append((y, x))
+        return int(Polygon(corners).area) + self.perimeter() // 2 + 1
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        lagoon = Lagoon(data)
+    print(lagoon.area())
