@@ -7,7 +7,10 @@ class Lagoon:
         self.directions: list[str] = []
         self.lengths: list[int] = []
         for line in data:
-            direction, length = line.strip().split()[:2]
+            direction, length, colour = line.strip().split()
+            if swap:
+                direction = 'RDLU'[int(colour[-2])]
+                length = int(colour[2:-2], 16)
             self.directions.append(direction)
             self.lengths.append(int(length))
 
@@ -34,4 +37,7 @@ class Lagoon:
 if __name__ == '__main__':
     with open('input.txt') as data:
         lagoon = Lagoon(data, False)
-    print(lagoon.area())
+        print(lagoon.area())
+        data.seek(0)
+        lagoon = Lagoon(data, True)
+        print(lagoon.area())
