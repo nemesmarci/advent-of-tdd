@@ -21,7 +21,11 @@ class FlipFlop(Module):
         self.state: bool = False
 
     def signals(self, input_signal, _) -> list[tuple[str, bool]]:
-        return []
+        if input_signal:
+            return []
+        else:
+            self.state = not self.state
+        return [(o, self.state) for o in self.outputs]
 
 
 class Conjunction(Module):
