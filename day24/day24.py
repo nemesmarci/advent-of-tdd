@@ -1,3 +1,5 @@
+
+import z3
 from typing import Iterable
 
 
@@ -28,10 +30,22 @@ class Storm:
         return intersections
 
     def part_two(self) -> int:
-        return 0
+        xs, ys, zs, us, vs, ws = z3.Reals('xs, ys, zs, us, vs, ws')
+        T = z3.RealVector('t', len(self.hails))
+        solver = z3.Solver()
+        for t, ((xh, yh, zh), (uh, vh, wh)) in zip(T, self.hails):
+            solver.add(t >= 0)
+            solver.add(xh + uh * t == xs + us * t)
+            solver.add(yh + vh * t == ys + vs * t)
+            solver.add(zh + wh * t == zs + ws * t)
+
+        solver.check()
+        m = solver.model()
+        return m[xs].as_long() + m[ys].as_long() + m[zs].as_long()
 
 
 if __name__ == '__main__':
     with open('input.txt') as data:
         storm = Storm(data)
     print(storm.part_one(200000000000000, 400000000000000))
+    print(storm.part_two())
