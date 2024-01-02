@@ -1,5 +1,6 @@
 from typing import Iterable
 from heapq import heappush, heappop
+from collections import defaultdict
 
 
 class Walk:
@@ -39,11 +40,38 @@ class Walk:
                     heappush(heap, (cur_d - 1, n, visited | {n}))
         return max_hike
 
+    def paths(self, nodes):
+        graph = defaultdict(dict)
+        for node in nodes:
+            for neighbour in (n for n in self.neighbours(*node)):
+                visited = {node}
+                cur = neighbour
+                while cur not in nodes:
+                    visited.add(cur)
+                    cur = next(n for n in self.neighbours(*cur) if n not in visited)
+                graph[node][cur] = len(visited)
+                graph[cur][node] = len(visited)
+        return graph
+
     def part_two(self) -> int:
-        return 0
+        start = (0, 1)
+        end = (self.y, self.x - 1)
+        nodes = [start] + [n for n in self.area if len(self.neighbours(*n)) > 2] + [end]
+        graph = self.paths(nodes)
+        max_hike = 0
+        heap = [(0, start, {start})]
+        while heap:
+            cur_d, (y, x), visited = heappop(heap)
+            if (y, x) == end and -cur_d > max_hike:
+                max_hike = -cur_d
+                continue
+            for n in (n for n in graph[(y, x)] if n not in visited):
+                heappush(heap, (cur_d - graph[(y, x)][n], n, visited | {n}))
+        return max_hike
 
 
 if __name__ == "__main__":
     with open('input.txt') as data:
         walk = Walk(data)
     print(walk.part_one())
+    print(walk.part_two())
