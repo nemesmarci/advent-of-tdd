@@ -41,5 +41,9 @@ class Machine:
                     raise ValueError(f'Cannot parse module `{line}`')
             self.modules[module] = module_type(outputs.split(', '))
 
-    def add_inputs(self):
-        ...
+    def add_inputs(self) -> None:
+        for m, module in self.modules.items():
+            if type(module) is Conjunction:
+                for o, other in self.modules.items():
+                    if m in other.outputs:
+                        module.inputs[o] = False
