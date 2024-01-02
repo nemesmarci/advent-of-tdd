@@ -29,27 +29,63 @@ CONJUNCTION_INPUTS = [
     {'c': False}
 ]
 
+TEST_DATA2 = [
+    "broadcaster -> a",
+    "%a -> inv, con",
+    "&inv -> b",
+    "%b -> con",
+    "&con -> output"
+]
+
+BROADCASTER_OUTPUTS2 = ['a']
+
+FLIPFLOPS2 = ['a', 'b']
+
+FLIPFLOP_OUTPUTS2 = [
+    ['inv', 'con'],
+    ['con']
+]
+
+CONJUNCTIONS2 = ['inv', 'con']
+
+CONJUNCTION_OUTPUTS2 = [
+    ['b'],
+    ['output']
+]
+
+CONJUNCTION_INPUTS2 = [
+    {'a': False},
+    {'a': False, 'b': False}
+]
+
 
 class TestMachine(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.machine = Machine(TEST_DATA)
-
     def testParse(self):
-        broadcaster = self.machine.modules['broadcaster']
-        self.assertListEqual(broadcaster.outputs, BROADCASTER_OUTPUTS)
-        for f, outputs in zip(FLIPFLOPS, FLIPFLOP_OUTPUTS):
-            flipflop = self.machine.modules[f]
-            self.assertEqual(flipflop.state, False)
-            self.assertListEqual(flipflop.outputs, outputs)
-        for c, outputs in zip(CONJUNCTIONS, CONJUNCTION_OUTPUTS):
-            conjunction = self.machine.modules[c]
-            self.assertListEqual(conjunction.outputs, outputs)
+        for (test_data, broadcaster_outputs, flipflops, flipflop_outputs,
+             conjunctions, conjunction_outputs, conjunction_inputs) in \
+                [[TEST_DATA, BROADCASTER_OUTPUTS, FLIPFLOPS, FLIPFLOP_OUTPUTS,
+                  CONJUNCTIONS, CONJUNCTION_OUTPUTS, CONJUNCTION_INPUTS],
+                 [TEST_DATA2, BROADCASTER_OUTPUTS2, FLIPFLOPS2, FLIPFLOP_OUTPUTS2,
+                  CONJUNCTIONS2, CONJUNCTION_OUTPUTS2, CONJUNCTION_INPUTS2]]:
+            machine = Machine(test_data)
+            broadcaster = machine.modules['broadcaster']
+            self.assertListEqual(broadcaster.outputs, broadcaster_outputs)
+            for f, outputs in zip(flipflops, flipflop_outputs):
+                flipflop = machine.modules[f]
+                self.assertEqual(flipflop.state, False)
+                self.assertListEqual(flipflop.outputs, outputs)
+            for c, outputs in zip(conjunctions, conjunction_outputs):
+                conjunction = machine.modules[c]
+                self.assertListEqual(conjunction.outputs, outputs)
 
     def testInputs(self):
-        self.machine.add_inputs()
-        for c, inputs in zip(CONJUNCTIONS, CONJUNCTION_INPUTS):
-            self.assertDictEqual(self.machine.modules[c].inputs, inputs)
+        for test_data, conjunctions, conjunction_inputs in \
+                [[TEST_DATA, CONJUNCTIONS, CONJUNCTION_INPUTS],
+                 [TEST_DATA2, CONJUNCTIONS2, CONJUNCTION_INPUTS2]]:
+            machine = Machine(test_data)
+            machine.add_inputs()
+            for c, inputs in zip(conjunctions, conjunction_inputs):
+                self.assertDictEqual(machine.modules[c].inputs, inputs)
 
 
 if __name__ == '__main__':
