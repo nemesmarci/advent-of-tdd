@@ -26,6 +26,9 @@ class TestGarden(unittest.TestCase):
         self.assertEqual(self.garden.x, 10)
         self.assertEqual(self.garden.start, (5, 5))
 
+    def testReachable(self):
+        self.assertEqual(self.garden.reachable(6), 16)
+
 
 if __name__ == '__main__':
     unittest.main()

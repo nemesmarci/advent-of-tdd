@@ -13,3 +13,6 @@ class Garden:
                     self.area.add((y, x))
         self.y: int = y
         self.x: int = x
+
+    def reachable(self, steps) -> int:
+        return 0
