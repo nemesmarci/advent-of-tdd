@@ -26,6 +26,9 @@ class MyTestCase(unittest.TestCase):
     def testParse(self):
         self.assertListEqual(self.storm.hails, HAILS)
 
+    def testPart1(self):
+        self.assertEqual(self.storm.part_one(7, 27), 2)
+
 
 if __name__ == '__main__':
     unittest.main()

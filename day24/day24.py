@@ -7,3 +7,6 @@ class Storm:
         for line in map(str.strip, data):
             pos, vel = line.split(' @ ')
             self.hails.append((tuple(map(int, pos.split(', '))), tuple(map(int, vel.split(', ')))))
+
+    def part_one(self, low: int, high: int) -> int:
+        return 0
