@@ -39,6 +39,10 @@ class Walk:
                     heappush(heap, (cur_d - 1, n, visited | {n}))
         return max_hike
 
+    def part_two(self) -> int:
+        return 0
+
+
 if __name__ == "__main__":
     with open('input.txt') as data:
         walk = Walk(data)

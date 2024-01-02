@@ -41,6 +41,9 @@ class TestWalk(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.walk.part_one(), 94)
 
+    def testPart2(self):
+        self.assertEqual(self.walk.part_two(), 154)
+
 
 if __name__ == '__main__':
     unittest.main()
