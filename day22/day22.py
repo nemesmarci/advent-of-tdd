@@ -33,16 +33,30 @@ class Bricks:
         for brick in sorted(self.bricks, key=lambda x: x.z1):
             assert brick.z1 <= brick.z2 and brick.y1 <= brick.y2 and brick.x1 <= brick.x2
             while brick.z1 > 1 and not any(any(other.y1 <= y <= other.y2 for y in range(brick.y1, brick.y2 + 1)) and
-                                     any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))
-                                     for other in tops[brick.z1 - 1]):
+                                           any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))
+                                           for other in tops[brick.z1 - 1]):
                 brick.z1 -= 1
                 brick.z2 -= 1
             tops[brick.z2].add(brick)
             for support in (other for other in tops[brick.z1 - 1]
-                      if any(other.y1 <= y <= other.y2 for y in range(brick.y1, brick.y2 + 1)) and
-                         any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))):
+                            if any(other.y1 <= y <= other.y2 for y in range(brick.y1, brick.y2 + 1)) and
+                            any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))):
                 support.supporting.add(brick)
                 brick.supported_by.add(support)
 
     def part_one(self) -> int:
-        return 0
+        safe = 0
+        for brick in self.bricks:
+            if not brick.supporting:
+                safe += 1
+            elif all(any(supported in other.supporting for other in self.bricks if other != brick)
+                     for supported in brick.supporting):
+                safe += 1
+        return safe
+
+
+if __name__ == '__main__':
+    with open('input.txt') as data:
+        bricks = Bricks(data)
+        bricks.fall()
+        print(bricks.part_one())
