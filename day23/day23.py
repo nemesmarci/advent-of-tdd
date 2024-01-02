@@ -10,3 +10,6 @@ class Walk:
                     self.area[(y, x)] = c
         self.y: int = y
         self.x: int = x
+
+    def part_one(self) -> int:
+        return 0

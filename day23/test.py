@@ -38,6 +38,8 @@ class TestWalk(unittest.TestCase):
         self.assertEqual(self.walk.y, 22)
         self.assertEqual(self.walk.x, 22)
 
+    def testPart1(self):
+        self.assertEqual(self.walk.part_one(), 94)
 
 
 if __name__ == '__main__':
