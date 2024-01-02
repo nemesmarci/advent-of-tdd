@@ -1,5 +1,12 @@
 import re
 from typing import Iterable, Any
+from collections import deque
+from dataclasses import dataclass
+
+
+@dataclass
+class Value:
+    value: int
 
 
 class Module:
@@ -64,4 +71,21 @@ class Machine:
                         module.inputs[o] = False
 
     def part_one(self) -> int:
-        return 0
+        low, high = Value(0), Value(0)
+        for _ in range(1000):
+            queue = deque([('broadcaster', False, 'button')])
+            while queue:
+                module, input_signal, source_module = queue.popleft()
+                (high if input_signal else low).value += 1
+                if module in self.modules:
+                    for output, output_signal in self.modules[module].signals(input_signal, source_module):
+                        queue.append((output, output_signal, module))
+
+        return low.value * high.value
+
+
+if __name__ == "__main__":
+    with open('input.txt') as data:
+        machine = Machine(data)
+    machine.add_inputs()
+    print(machine.part_one())
