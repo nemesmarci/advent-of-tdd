@@ -61,6 +61,11 @@ class TestBricks(unittest.TestCase):
         bricks.fall()
         self.assertEqual(bricks.part_one(), 5)
 
+    def testPart2(self):
+        bricks = Bricks(TEST_DATA)
+        bricks.fall()
+        self.assertEqual(bricks.part_two(), 7)
+
 
 if __name__ == '__main__':
     unittest.main()
