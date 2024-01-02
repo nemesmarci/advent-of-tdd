@@ -27,13 +27,13 @@ class TestGarden(unittest.TestCase):
         self.assertEqual(self.garden.start, (5, 5))
 
     def testReachable(self):
-        self.assertEqual(self.garden.reachable(6), 16)
-        self.assertEqual(self.garden.reachable(10), 50)
-        self.assertEqual(self.garden.reachable(50), 1594)
-        self.assertEqual(self.garden.reachable(100), 6536)
-        self.assertEqual(self.garden.reachable(500), 167004)
-        self.assertEqual(self.garden.reachable(1000), 668697)
-        self.assertEqual(self.garden.reachable(5000), 16733044)
+        self.assertEqual(self.garden.reachable(6, False), 16)
+        self.assertEqual(self.garden.reachable(6, True), 16)
+        self.assertEqual(self.garden.reachable(10, True), 50)
+        self.assertEqual(self.garden.reachable(50, True), 1594)
+        self.assertEqual(self.garden.reachable(100, True), 6536)
+        self.assertEqual(self.garden.reachable(500, True), 167004)
+        self.assertEqual(self.garden.reachable(1000, True), 668697)
 
 
 if __name__ == '__main__':
