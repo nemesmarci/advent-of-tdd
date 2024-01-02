@@ -34,7 +34,9 @@ class Conjunction(Module):
         self.inputs: dict[str, bool] = {}
 
     def signals(self, input_signal, source_module) -> list[tuple[str, bool]]:
-        return []
+        self.inputs[source_module] = input_signal
+        output_signal = not all(self.inputs.values())
+        return [(o, output_signal) for o in self.outputs]
 
 
 class Machine:
