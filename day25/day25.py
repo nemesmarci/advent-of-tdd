@@ -9,3 +9,6 @@ class Components:
             component, others = line.split(': ')
             for other in others.split():
                 self.graph.add_edge(component, other)
+
+    def part_one(self) -> int:
+        return 0

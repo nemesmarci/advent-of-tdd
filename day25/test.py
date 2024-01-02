@@ -27,6 +27,9 @@ class TestComponents(unittest.TestCase):
         self.assertEqual(self.components.graph.number_of_nodes(), 15)
         self.assertEqual(self.components.graph.number_of_edges(), 33)
 
+    def testPart1(self):
+        self.assertEqual(self.components.part_one(), 54)
+
 
 if __name__ == '__main__':
     unittest.main()
