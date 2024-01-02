@@ -2,6 +2,8 @@ import re
 from typing import Iterable, Any
 from collections import deque
 from dataclasses import dataclass
+from itertools import count
+from math import lcm
 
 
 @dataclass
@@ -80,12 +82,30 @@ class Machine:
                 if module in self.modules:
                     for output, output_signal in self.modules[module].signals(input_signal, source_module):
                         queue.append((output, output_signal, module))
-
         return low.value * high.value
+
+    def part_two(self) -> int:
+        inputs = {ii: None for i in self.modules['rx'].inputs for ii in self.modules[i].inputs}
+        for i in count(1):
+            queue = deque([('broadcaster', False, 'button')])
+            while queue:
+                module, input_signal, source_module = queue.popleft()
+                if module in inputs and not input_signal:
+                    inputs[module] = i
+                if all(inputs.values()):
+                    return lcm(*(inputs.values()))
+                if module in self.modules:
+                    for output, output_signal in self.modules[module].signals(input_signal, source_module):
+                        queue.append((output, output_signal, module))
 
 
 if __name__ == "__main__":
     with open('input.txt') as data:
         machine = Machine(data)
+        data.seek(0)
+        machine2 = Machine(data)
     machine.add_inputs()
     print(machine.part_one())
+    machine2.modules['rx'] = Conjunction([])
+    machine2.add_inputs()
+    print(machine2.part_two())
