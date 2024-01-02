@@ -87,6 +87,18 @@ class TestMachine(unittest.TestCase):
             for c, inputs in zip(conjunctions, conjunction_inputs):
                 self.assertDictEqual(machine.modules[c].inputs, inputs)
 
+    def testSignals(self):
+        for (test_data, broadcaster_outputs, flipflops, flipflop_outputs,
+             conjunctions, conjunction_outputs, conjunction_inputs) in \
+                [[TEST_DATA, BROADCASTER_OUTPUTS, FLIPFLOPS, FLIPFLOP_OUTPUTS,
+                  CONJUNCTIONS, CONJUNCTION_OUTPUTS, CONJUNCTION_INPUTS],
+                 [TEST_DATA2, BROADCASTER_OUTPUTS2, FLIPFLOPS2, FLIPFLOP_OUTPUTS2,
+                  CONJUNCTIONS2, CONJUNCTION_OUTPUTS2, CONJUNCTION_INPUTS2]]:
+            machine = Machine(test_data)
+            for test_signal in [False, True]:
+                self.assertListEqual(machine.modules['broadcaster'].signals(test_signal, 'button'),
+                                     [(o, test_signal) for o in broadcaster_outputs])
+
 
 if __name__ == '__main__':
     unittest.main()
