@@ -11,8 +11,8 @@ class Broadcaster(Module):
     def __init__(self, outputs) -> None:
         super().__init__(outputs)
 
-    def signals(self, input_signal, source_module) -> list[tuple[str, bool]]:
-        return []
+    def signals(self, input_signal, _) -> list[tuple[str, bool]]:
+        return [(o, input_signal) for o in self.outputs]
 
 
 class FlipFlop(Module):
