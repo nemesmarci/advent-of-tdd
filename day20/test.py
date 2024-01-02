@@ -95,6 +95,7 @@ class TestMachine(unittest.TestCase):
                  [TEST_DATA2, BROADCASTER_OUTPUTS2, FLIPFLOPS2, FLIPFLOP_OUTPUTS2,
                   CONJUNCTIONS2, CONJUNCTION_OUTPUTS2, CONJUNCTION_INPUTS2]]:
             machine = Machine(test_data)
+            machine.add_inputs()
             for test_signal in [False, True]:
                 self.assertListEqual(machine.modules['broadcaster'].signals(test_signal, 'button'),
                                      [(o, test_signal) for o in broadcaster_outputs])
@@ -108,6 +109,12 @@ class TestMachine(unittest.TestCase):
                 self.assertListEqual(flipflop.signals(True, 'button'), [])
                 self.assertListEqual(flipflop.signals(False, 'button'), [(o, False) for o in outputs])
                 self.assertEqual(flipflop.state, False)
+
+            for c, inputs, outputs in zip(conjunctions, conjunction_inputs, conjunction_outputs):
+                conjunction = machine.modules[c]
+                for i in list(inputs)[:-1]:
+                    self.assertListEqual(conjunction.signals(True, i), [(o, True) for o in outputs])
+                self.assertListEqual(conjunction.signals(True, list(inputs)[-1]), [(o, False) for o in outputs])
 
 
 if __name__ == '__main__':
