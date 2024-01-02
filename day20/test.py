@@ -25,6 +25,10 @@ CONJUNCTION_OUTPUTS = [
     ['a']
 ]
 
+CONJUNCTION_INPUTS = [
+    {'c': False}
+]
+
 
 class TestMachine(unittest.TestCase):
     @classmethod
@@ -41,6 +45,11 @@ class TestMachine(unittest.TestCase):
         for c, outputs in zip(CONJUNCTIONS, CONJUNCTION_OUTPUTS):
             conjunction = self.machine.modules[c]
             self.assertListEqual(conjunction.outputs, outputs)
+
+    def testInputs(self):
+        self.machine.add_inputs()
+        for c, inputs in zip(CONJUNCTIONS, CONJUNCTION_INPUTS):
+            self.assertDictEqual(self.machine.modules[c].inputs, inputs)
 
 
 if __name__ == '__main__':

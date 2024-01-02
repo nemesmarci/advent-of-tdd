@@ -40,3 +40,6 @@ class Machine:
                 case _:
                     raise ValueError(f'Cannot parse module `{line}`')
             self.modules[module] = module_type(outputs.split(', '))
+
+    def add_inputs(self):
+        ...
