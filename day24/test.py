@@ -29,6 +29,9 @@ class MyTestCase(unittest.TestCase):
     def testPart1(self):
         self.assertEqual(self.storm.part_one(7, 27), 2)
 
+    def testPart2(self):
+        self.assertEqual(self.storm.part_two(), 47)
+
 
 if __name__ == '__main__':
     unittest.main()

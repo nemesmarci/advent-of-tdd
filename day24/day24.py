@@ -27,6 +27,9 @@ class Storm:
                     pass
         return intersections
 
+    def part_two(self) -> int:
+        return 0
+
 
 if __name__ == '__main__':
     with open('input.txt') as data:
