@@ -56,6 +56,11 @@ class TestBricks(unittest.TestCase):
             self.assertSetEqual({s.id for s in brick.supporting}, supporting)
             self.assertSetEqual({s.id for s in brick.supported_by}, supported_by)
 
+    def testPart1(self):
+        bricks = Bricks(TEST_DATA)
+        bricks.fall()
+        self.assertEqual(bricks.part_one(), 5)
+
 
 if __name__ == '__main__':
     unittest.main()

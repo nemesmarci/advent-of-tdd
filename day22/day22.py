@@ -43,3 +43,6 @@ class Bricks:
                          any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))):
                 support.supporting.add(brick)
                 brick.supported_by.add(support)
+
+    def part_one(self) -> int:
+        return 0
