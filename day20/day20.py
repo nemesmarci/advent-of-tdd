@@ -62,3 +62,6 @@ class Machine:
                 for o, other in self.modules.items():
                     if m in other.outputs:
                         module.inputs[o] = False
+
+    def part_one(self) -> int:
+        return 0

@@ -116,6 +116,12 @@ class TestMachine(unittest.TestCase):
                     self.assertListEqual(conjunction.signals(True, i), [(o, True) for o in outputs])
                 self.assertListEqual(conjunction.signals(True, list(inputs)[-1]), [(o, False) for o in outputs])
 
+    def testPart1(self):
+        for test_data, expected in zip([TEST_DATA, TEST_DATA2], [32000000, 11687500]):
+            machine = Machine(test_data)
+            machine.add_inputs()
+            self.assertEqual(machine.part_one(), expected)
+
 
 if __name__ == '__main__':
     unittest.main()
