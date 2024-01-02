@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import Iterable
+from collections import defaultdict
 
 
 class Brick:
@@ -28,4 +29,17 @@ class Bricks:
             self.bricks.append(Brick(i, x1, y1, z1, x2, y2, z2))
 
     def fall(self) -> None:
-        ...
+        tops = defaultdict(set)
+        for brick in sorted(self.bricks, key=lambda x: x.z1):
+            assert brick.z1 <= brick.z2 and brick.y1 <= brick.y2 and brick.x1 <= brick.x2
+            while brick.z1 > 1 and not any(any(other.y1 <= y <= other.y2 for y in range(brick.y1, brick.y2 + 1)) and
+                                     any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))
+                                     for other in tops[brick.z1 - 1]):
+                brick.z1 -= 1
+                brick.z2 -= 1
+            tops[brick.z2].add(brick)
+            for support in (other for other in tops[brick.z1 - 1]
+                      if any(other.y1 <= y <= other.y2 for y in range(brick.y1, brick.y2 + 1)) and
+                         any(other.x1 <= x <= other.x2 for x in range(brick.x1, brick.x2 + 1))):
+                support.supporting.add(brick)
+                brick.supported_by.add(support)

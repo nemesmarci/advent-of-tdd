@@ -24,39 +24,37 @@ FALLING_BRICKS = [
 ]
 
 SUPPORTING = [
-    [1, 2],
-    [3, 4],
-    [3, 4],
-    [5],
-    [5],
-    [6],
-    []
+    {1, 2},
+    {3, 4},
+    {3, 4},
+    {5},
+    {5},
+    {6},
+    set()
 ]
 
 SUPPORTED_BY = [
-    [],
-    [0],
-    [0],
-    [1, 2],
-    [1, 2],
-    [3, 4],
-    [5],
+    set(),
+    {0},
+    {0},
+    {1, 2},
+    {1, 2},
+    {3, 4},
+    {5},
 ]
 
 
 class TestBricks(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.bricks = Bricks(TEST_DATA)
-
     def testParse(self):
-        self.assertListEqual(self.bricks.bricks, FALLING_BRICKS)
+        bricks = Bricks(TEST_DATA)
+        self.assertListEqual(bricks.bricks, FALLING_BRICKS)
 
     def testFall(self):
-        self.bricks.fall()
-        for brick, supporting, supported_by in zip(self.bricks.bricks, SUPPORTING, SUPPORTED_BY):
-            self.assertSetEqual(brick.supporting, {self.bricks.bricks[s] for s in supporting})
-            self.assertSetEqual(brick.supported_by, {self.bricks.bricks[s] for s in supported_by})
+        bricks = Bricks(TEST_DATA)
+        bricks.fall()
+        for brick, supporting, supported_by in zip(bricks.bricks, SUPPORTING, SUPPORTED_BY):
+            self.assertSetEqual({s.id for s in brick.supporting}, supporting)
+            self.assertSetEqual({s.id for s in brick.supported_by}, supported_by)
 
 
 if __name__ == '__main__':
