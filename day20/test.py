@@ -99,6 +99,16 @@ class TestMachine(unittest.TestCase):
                 self.assertListEqual(machine.modules['broadcaster'].signals(test_signal, 'button'),
                                      [(o, test_signal) for o in broadcaster_outputs])
 
+            for f, outputs in zip(flipflops, flipflop_outputs):
+                flipflop = machine.modules[f]
+                self.assertEqual(flipflop.state, False)
+                self.assertListEqual(flipflop.signals(True, 'button'), [])
+                self.assertListEqual(flipflop.signals(False, 'button'), [(o, True) for o in outputs])
+                self.assertEqual(flipflop.state, True)
+                self.assertListEqual(flipflop.signals(True, 'button'), [])
+                self.assertListEqual(flipflop.signals(False, 'button'), [(o, False) for o in outputs])
+                self.assertEqual(flipflop.state, False)
+
 
 if __name__ == '__main__':
     unittest.main()

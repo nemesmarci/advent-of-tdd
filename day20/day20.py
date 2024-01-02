@@ -20,6 +20,9 @@ class FlipFlop(Module):
         super().__init__(outputs)
         self.state: bool = False
 
+    def signals(self, input_signal, _) -> list[tuple[str, bool]]:
+        return []
+
 
 class Conjunction(Module):
     def __init__(self, outputs) -> None:
