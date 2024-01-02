@@ -1,6 +1,14 @@
 from __future__ import annotations
+import sys
 from typing import Iterable
 from collections import defaultdict
+from dataclasses import dataclass
+from copy import deepcopy
+
+
+@dataclass
+class Value:
+    value: int
 
 
 class Brick:
@@ -17,6 +25,18 @@ class Brick:
 
     def __hash__(self):
         return self.id
+
+    def __deepcopy__(self, memo):
+        memo[id(self)] = newself = self.__class__(deepcopy(self.id, memo),
+                                                  deepcopy(self.x1, memo),
+                                                  deepcopy(self.y1, memo),
+                                                  deepcopy(self.z1, memo),
+                                                  deepcopy(self.x2, memo),
+                                                  deepcopy(self.y2, memo),
+                                                  deepcopy(self.z2, memo))
+        newself.supporting = deepcopy(self.supporting, memo)
+        newself.supported_by = deepcopy(self.supported_by, memo)
+        return newself
 
 
 class Bricks:
@@ -54,8 +74,23 @@ class Bricks:
                 safe += 1
         return safe
 
+    @staticmethod
+    def remove(brick, removed):
+        removed.value += 1
+        for supported in brick.supporting:
+            supported.supported_by.remove(brick)
+            if not supported.supported_by:
+                Bricks.remove(supported, removed)
+
     def part_two(self) -> int:
-        return 0
+        total = 0
+        for brick in self.bricks:
+            new_bricks = deepcopy(self.bricks)
+            brick = next(new_brick for new_brick in new_bricks if brick.id == new_brick.id)
+            removed = Value(0)
+            self.remove(brick, removed)
+            total += removed.value - 1
+        return total
 
 
 if __name__ == '__main__':
@@ -63,3 +98,5 @@ if __name__ == '__main__':
         bricks = Bricks(data)
         bricks.fall()
         print(bricks.part_one())
+        sys.setrecursionlimit(2000)
+        print(bricks.part_two())
